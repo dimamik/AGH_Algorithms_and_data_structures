@@ -3,6 +3,7 @@ Dana jest mapa kraju w postaci grafu G= (V, E). Kierowca chce przejechaćz miast
 """
     
 """ 
-1. 
+1. BFSem przechodzimy po wierzcholkach i korzystamy z DoubleQueue, łóżmy dzieci w nast sposob:
+0 z prawej strony, jedynki z lewej. Zdejmujemy z prawej strony i tak dalej. Nasze miasto bedzie pierwszy raz odwiedzone poprzez "najkrotsza sciezke"
 
 """

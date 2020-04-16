@@ -70,3 +70,4 @@ def main():
    L = MergeSortOnLinkedList(L)
    L.print_list_as_tab()
 main()
+print("LOL")
