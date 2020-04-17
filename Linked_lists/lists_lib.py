@@ -90,32 +90,93 @@ class LinkedList():
         node_to_add.next=tmp
         if tmp==None:
             self.last=node_to_add
-        
+    def del_from_end(self):
+        #Need to find the previous element
+        tmp=self.first
+        if tmp==None:return
+        if tmp.next==None:
+            self.first=None
+            self.last=None
+            return
+        while tmp.next.next!=None:
+            tmp=tmp.next
+            print(tmp.value)
+        to_del=self.last
+        self.last=tmp
+        del to_del
+    def del_from_begining(self):
+        tmp=self.first
+        if tmp==None or tmp.next==None:
+            self.first=None
+            self.last=None
+            return
+        self.first=tmp.next
+        del tmp
+    def is_present(self,el_val):
+        tmp=self.first
+        while tmp!=None:
+            if tmp.value==el_val:
+                return True
+            tmp=tmp.next
+        return False
+    def Find_Node_By_Value(self,el_val):
+        tmp=self.first
+        while tmp!=None:
+            if tmp.value==el_val:
+                return tmp
+            tmp=tmp.next
+        return None
+    def size_of(self):
+        tmp=self.first
+        count=0
+        while tmp!=None:
+            count+=1
+            tmp=tmp.next
+        return count
+    def switch(self,prev,curr):
+        nast_el=curr.next
+        if nast_el.next==None:
+            self.last=curr
+        tmp=nast_el.next
+        nast_el.next=curr
+        curr.next=tmp
+        prev.next=nast_el
+    def Bubble_sort(self):
+        wartownik=Node(0)
+        wartownik.next=self.first
+        for _ in range(self.size_of()):
+            curr=wartownik.next
+            prev=wartownik
+            while curr.next!=None:
+                print("Checking",curr.value,"and",curr.next.value)
+                if curr.value>curr.next.value:
+                    self.switch(prev,curr)
+                    prev=prev.next
+                else:
+                    prev=curr
+                    curr=curr.next
+        self.first=wartownik.next
+
+    def Insertion_Sort(self):
+        pass
+    def Merge_Sort(self):
+        """ 
+        have an example
+         """
+        pass
+    def Quick_Sort(self):
+        pass
+    def Bucket_Sort(self):
+        pass
 
 
-    def switch(self,prev,f):
-        s=f.next
-        if s==None:return
-        #First one
-        if prev==None and f==self.first:
-            self.first=s
-        if s.next==None:
-            self.last=f
-        f.next=s.next
-        s.next=f
 
 
 X=LinkedList()
-arr=[0,1,2]
+arr=[0,0,0,0,1,0,1,0,1,0]
 X.make_from_array(arr)
-K=Node(3)
-X.add_to_its_sorted_place(K)
-tab=X.print_list_as_tab()
-X.print_to_console()
-print(tab)
-
-        
-
+X.Bubble_sort()
+print(X.print_list_as_tab())
 
 
 
