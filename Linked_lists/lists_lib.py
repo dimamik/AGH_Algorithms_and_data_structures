@@ -202,11 +202,61 @@ class LinkedList():
         return Merge_On_Lists(firstHalfSorted, secondHalfSorted)
     def Radix_Sort(self):
         pass
-    def Bucket_Sort(self):
-        pass
-    """ 
-    
-     """
+    def FindMaxEl(self):
+        if self.first==None:
+            return None
+        tmp=self.first
+        max_el=tmp.value
+        while tmp!=None:
+            max_el=max(max_el,tmp.value)
+            tmp=tmp.next
+        return max_el
+    def Bucket_Sort(self,n=False):
+        """ 
+        Dziala tylko dla jednostajnego rozkladu danych w listach
+        """
+        #Rozdialnosc Bucketa -> parametr dla najlepszego rozkladu
+        #Im lepiej rozklad, tym mniej zlozonosc
+        """ 
+        Rozd Bucketa ->       max_el/ilosc_elementow
+        Ilosc Bucketow ->     Max_el/rozd_Bucketa=ilosc_elementow
+        ind Bucketa dla el -> El/rozd_Bucketa
+        """
+        max_el=self.FindMaxEl()
+        ilosc_elem=self.size_of()
+        if ilosc_elem==0:
+            return None
+        Rozdz_Bucketa=max_el/ilosc_elem
+        tab_of_Buckets=[None]*(ilosc_elem+1)
+        for i in range(ilosc_elem+1):
+            tab_of_Buckets[i]=LinkedList()
+        tmp=self.first
+        while tmp!=None:
+            copy_to_add=Node(tmp.value)
+            index=int (tmp.value/Rozdz_Bucketa)
+            tab_of_Buckets[index].add_to_its_sorted_place(copy_to_add)
+            tmp=tmp.next
+        to_ret=LinkedList()
+        for i in range(ilosc_elem+1):
+            pt=tab_of_Buckets[i].first
+            if pt==None:
+                continue
+            to_ret.add_to_end(pt)
+
+
+        return to_ret
+        
+
+X=LinkedList()
+arr=[1]
+X.make_from_array(arr)
+tab = X.Bucket_Sort()
+print(tab.print_list_as_tab())
+
+
+
+
+
 def Merge_On_Lists(List1, List2):
     if List1.isEmpty():
         return List2
@@ -290,11 +340,6 @@ def QuickSortOnLinkedList(List):
 
 
 
-X=LinkedList()
-arr=[4,3,2]
-X.make_from_array(arr)
-X=X.Merge_Sort()
-print(X.print_list_as_tab())
 
 
 
