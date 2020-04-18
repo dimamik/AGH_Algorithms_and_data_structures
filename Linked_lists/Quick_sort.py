@@ -1,5 +1,8 @@
 from lists_lib import *
 def ConcatenateLinkedLists(arrayOfLinkedLists):
+    """ 
+    Bit Algo Function
+     """
     result = LinkedList()
     foundBegining = False
     for i in arrayOfLinkedLists:
@@ -16,6 +19,9 @@ def ConcatenateLinkedLists(arrayOfLinkedLists):
     return result
 
 def QuickSortOnLinkedList(List):
+    """ 
+    Bit Algo Function
+     """
     if List.isEmpty() or List.hasOneElement():
         return List
     smaller = LinkedList()
@@ -24,10 +30,17 @@ def QuickSortOnLinkedList(List):
     p = List.first
     while p is not None:
         if p.value<List.last.value:
-            smaller.add(p.value)
+            smaller.add_value(p.value)
         elif p.value == List.last.value:
-            equal.add(p.value)
+            equal.add_value(p.value)
         else:
-            greater.add(p.value)
+            greater.add_value(p.value)
         p=p.next
     return ConcatenateLinkedLists([QuickSortOnLinkedList(smaller), equal, QuickSortOnLinkedList(greater)])
+
+
+X=LinkedList()
+arr=[4,3,2]
+X.make_from_array(arr)
+X=QuickSortOnLinkedList(X)
+print(X.print_list_as_tab())

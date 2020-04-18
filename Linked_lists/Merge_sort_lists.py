@@ -1,4 +1,6 @@
 from lists_lib import *
+
+
 def MergeSortedLists(List1, List2):
     if List1.isEmpty():
         return List2
@@ -25,7 +27,7 @@ def MergeSortedLists(List1, List2):
             r = r.next
             result.last = r
             p = p.next
-        while q is not None and p is not None and q.value<=p.value:
+        while q is not None and p is not None and q.value <= p.value:
             r.next = q
             r = r.next
             result.last = r
@@ -68,6 +70,5 @@ def main():
    L = LinkedList()
    L.make_from_array([11,58,900,33,24,56,78,90,55,76,3546435,666,777,909,9])
    L = MergeSortOnLinkedList(L)
-   L.print_list_as_tab()
+   print(L.print_list_as_tab())
 main()
-print("LOL")
