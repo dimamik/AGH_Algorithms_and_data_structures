@@ -62,6 +62,15 @@ class LinkedList():
             return
         self.last.next = node
         self.last = node
+    def size_of(self):
+        tmp=self.first
+        count=0
+        while tmp!=None:
+            count+=1
+            tmp=tmp.next
+        return count
+
+        
     def add_to_index_i_from_0(self,node_to_add,index):
         """ 
         Adding to index i or if there is no such, to the end
@@ -136,13 +145,6 @@ class LinkedList():
                 return tmp
             tmp=tmp.next
         return None
-    def size_of(self):
-        tmp=self.first
-        count=0
-        while tmp!=None:
-            count+=1
-            tmp=tmp.next
-        return count
     def switch(self,prev,curr):
         """ 
         Dziala tylko z wartownikiem!
@@ -242,10 +244,8 @@ class LinkedList():
             if pt==None:
                 continue
             to_ret.add_to_end(pt)
-
-
         return to_ret
-        
+            
 
 X=LinkedList()
 arr=[1]

@@ -39,8 +39,3 @@ def QuickSortOnLinkedList(List):
     return ConcatenateLinkedLists([QuickSortOnLinkedList(smaller), equal, QuickSortOnLinkedList(greater)])
 
 
-X=LinkedList()
-arr=[4,3,2]
-X.make_from_array(arr)
-X=QuickSortOnLinkedList(X)
-print(X.print_list_as_tab())

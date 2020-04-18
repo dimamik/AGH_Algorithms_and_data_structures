@@ -32,4 +32,4 @@ def Radix_sort(tab):
         tmp_decimal*=10
     return tab
 
-print(Radix_sort([0,15,14,123,123,121,120,128]))
+print(Radix_sort([0,156748,15,14,123,123,121,120,128,1564897]))
