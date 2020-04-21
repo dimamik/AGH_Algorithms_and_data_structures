@@ -6,6 +6,15 @@ class LinkedList():
     def __init__(self,first=None,last=None):
         self.first=first
         self.last=last
+    def MakeFromNode(self,node):
+        """ 
+        Robi z Node LinkedList in O(n)
+         """
+        self.first=node
+        tmp=self.first
+        while tmp!=None:
+            tmp=tmp.next
+        self.last=tmp
     def make_from_array(self,tab):
         if len(tab)==0:return
         self.first=Node(tab[0])
