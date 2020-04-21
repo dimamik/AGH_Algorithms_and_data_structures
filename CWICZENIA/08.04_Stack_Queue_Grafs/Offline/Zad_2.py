@@ -1,5 +1,6 @@
 """ Implementacja dla list sąsiedstwa, czyli:
 [[1,2,3],[],[4,5]], G[i]-lista numerów wierz połączonych z i-tym wierzchołkiem
+
 """ 
 class Wierzcholek():
     def __init__(self,index=0,polacz=None,index_parrent=None):
@@ -23,7 +24,7 @@ def tab_to_Wierz(tab):
 def DFSVisit(u,time,tab_ready):
         time+=1
         u.visited=True
-        u.entry=time 
+        u.entry=time
         #print(u.polacz)
         for i in u.polacz:
             #print("i, to ",i)
