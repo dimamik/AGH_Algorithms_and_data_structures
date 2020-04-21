@@ -1,4 +1,7 @@
-def select(L, j):
+def MedianOfMedians(L, j):
+    """ 
+    Works in O(n) in all cases
+     """
     if len(L) < 10:
         L.sort()
         return L[j]
@@ -10,8 +13,8 @@ def select(L, j):
     S.append(L[lIndex:])
     Meds = []
     for subList in S:
-        Meds.append(select(subList, int((len(subList)-1)/2)))
-    med = select(Meds, int((len(Meds)-1)/2))
+        Meds.append(MedianOfMedians(subList, int((len(subList)-1)/2)))
+    med = MedianOfMedians(Meds, int((len(Meds)-1)/2))
     L1 = []
     L2 = []
     L3 = []
@@ -23,8 +26,9 @@ def select(L, j):
         else:
             L2.append(i)
     if j < len(L1):
-        return select(L1, j)
+        return MedianOfMedians(L1, j)
     elif j < len(L2) + len(L1):
         return L2[0]
     else:
-        return select(L3, j-len(L1)-len(L2))
+        return MedianOfMedians(L3, j-len(L1)-len(L2))
+print(MedianOfMedians([8,7,6,5,4,3],2))
