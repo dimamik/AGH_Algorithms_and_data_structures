@@ -1,3 +1,8 @@
+""" 
+Od konca porownujemy tylko jesli istniejz istniejącymi literami
+ """
+
+
 def CountingSort(tab,pozition):
     """ 
     Counting sort for string via alphabetic liters
@@ -16,7 +21,7 @@ def CountingSort(tab,pozition):
         tab_of_liters[ord(tab[i][pozition])-97]-=1
     return tab_to_return
 
-""" 
+
 def RadixSort(tab,n):
     for i in range(n,-1,-1):
         tab=CountingSort(tab,i)
@@ -39,4 +44,4 @@ def SortString(tab):
             index_in_ret+=1
     return to_return
 
-print(SortString(["asjkda","ajs","a","aa","abcd"])) """
+print(SortString(["asjkda","ajs","a","aa","abcd"]))

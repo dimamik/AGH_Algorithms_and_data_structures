@@ -77,6 +77,7 @@ class Queue():
             k+=1
         print(tab_tmp)
 """ 
+
 K=Queue()
 K.push(6)
 K.push(6)

@@ -139,7 +139,7 @@ class LinkedList():
             self.last=None
             return
         self.first=tmp.next
-        del tmp
+        """ del tmp """
     def is_present(self,el_val):
         tmp=self.first
         while tmp!=None:
@@ -180,7 +180,6 @@ class LinkedList():
                     prev=curr
                     curr=curr.next
         self.first=wartownik.next
-
     def Insertion_Sort(self):
         Sorted=LinkedList()
         tmp=self.first
@@ -255,16 +254,6 @@ class LinkedList():
             to_ret.add_to_end(pt)
         return to_ret
             
-
-X=LinkedList()
-arr=[1]
-X.make_from_array(arr)
-tab = X.Bucket_Sort()
-print(tab.print_list_as_tab())
-
-
-
-
 
 def Merge_On_Lists(List1, List2):
     if List1.isEmpty():
@@ -346,8 +335,15 @@ def QuickSortOnLinkedList(List):
     return ConcatenateLinkedLists([QuickSortOnLinkedList(smaller), equal, QuickSortOnLinkedList(greater)])
 
 
+X=LinkedList()
+arr=[1]
+X.make_from_array(arr)
+tab = X.Bucket_Sort()
+print(tab.print_list_as_tab())
 
-
+                                                                        """ 
+                                                                        Made by Dzmitry Mikialevich
+                                                                        """
 
 
 

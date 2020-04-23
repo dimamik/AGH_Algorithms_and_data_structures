@@ -1,6 +1,6 @@
 def MedianOfMedians(L, j):
     """ 
-    Works in O(n) in all cases
+    Works in O(n) in all cases (Magiczne Piątki)
      """
     if len(L) < 10:
         L.sort()

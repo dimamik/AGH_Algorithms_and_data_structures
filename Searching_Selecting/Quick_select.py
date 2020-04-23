@@ -8,29 +8,23 @@ def Lomuto_part(tab,low,high):
     tab[curr_index+1],tab[high]=tab[high],tab[curr_index+1]
     return curr_index+1
 
-def kthSmallest(arr, l, r, k): 
-  
-    # if k is smaller than number of 
-    # elements in array 
+def kthSmallest(tab,k,l,r): 
+    """ 
+    Dziala rekursywnie wiec nie da sie zamienic l i r
+     """
     if (k > 0 and k <= r - l + 1): 
   
-        # Partition the array around last 
-        # element and get position of pivot 
-        # element in sorted array 
-        index = Lomuto_part(arr, l, r) 
-  
-        # if position is same as k 
+
+        index = Lomuto_part(tab, l, r) 
+
         if (index - l == k - 1): 
-            return arr[index] 
-  
-        # If position is more, recur  
-        # for left subarray  
+            return tab[index] 
+
         if (index - l > k - 1): 
-            return kthSmallest(arr, l, index - 1, k) 
-  
-        # Else recur for right subarray  
-        return kthSmallest(arr, index + 1, r,  
+            return kthSmallest(tab, l, index - 1, k) 
+ 
+        return kthSmallest(tab, index + 1, r,  
                             k - index + l - 1) 
-    return 99
+    return float("inf") 
 
 print(kthSmallest([2,5,1,8,3,6],0,5,3))
