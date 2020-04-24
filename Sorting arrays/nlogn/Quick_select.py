@@ -31,6 +31,6 @@ def kthSmallest(arr, l, r, k):
         # Else recur for right subarray  
         return kthSmallest(arr, index + 1, r,  
                             k - index + l - 1) 
-    return 99
+    return float("inf")
 
 print(kthSmallest([2,5,1,8,3,6],0,5,3))

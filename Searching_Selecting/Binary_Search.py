@@ -5,6 +5,9 @@ def Binary_Search(tab,el_searching,start=0,end=-1):
      """
     if end==-1: end=len(tab)
     if start>=end : return -1
+    """ 
+    zamiast -1 return start or end
+     """
     mid=(start+end)//2
     if tab[mid]==el_searching:return mid
     if mid==0: return -1
