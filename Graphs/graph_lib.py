@@ -11,9 +11,10 @@ class Vertex():
     def __init__(self):
         self.visited=False
         self.parrent=None
+        self.index=0
+        self.waga=0
+        self.distance=float("inf")
         self.d=0
-
-
 
 
 def Polacz_Wierzch_ls(tab,index_wierz):
@@ -22,6 +23,18 @@ def Are_Connnected_in_directed_ls(tab,fw,sw):
     if sw in tab[fw]:
         return 1
     return 0
+def Input_ls_Graph():
+    V,E=map(int,input().strip().split())
+    tab= [None] * (V+1)
+    for i in range(E):
+        vert_tmp = Vertex()
+        x,y,w=map(int,input().strip().split())
+        vert_tmp.index=y
+        vert_tmp.waga=w
+        tab[x]=vert_tmp
+    print(tab)
+
+
 
 """ 
 Reprezentacja poprzez Macierz sąsiedstwa
