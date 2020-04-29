@@ -8,6 +8,6 @@ drugim przypadku nie uda się uzyskać algorytmu liniowego. 
 """ 
 1. ... (Nagranie)
 
-
+1. 
 
  """
