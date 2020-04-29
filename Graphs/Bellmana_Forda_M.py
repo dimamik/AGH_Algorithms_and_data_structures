@@ -19,9 +19,9 @@ def BellmanaForda(graph,start,end):
     Dziala dla: 1) w(u,v) in RR (Czyli wszystkie wagi)
                 2) start i end to numery wierzcholków (Włączając)
                 3) Wykrywa negatywne cykli
+    Polega na : Przechodzeniu !!po wszystkich!! wierzcholkach i robieniu Relaksacji
     Zlozonosc : O(EV) - Worst Case
                 O(E)  - Best Case 
-    Polega na :
      """
     distance_graph=[float("inf")]*len(graph)
     distance_graph[start]=0
