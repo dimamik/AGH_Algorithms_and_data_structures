@@ -10,6 +10,6 @@ drugim przypadku nie uda się uzyskać algorytmu liniowego. 
 
 1. Rozw dla grafow rzadkich:
     W sposob banalny usuwamy krawedz (x,y) i puszczamy algorytm Dijkstry z y do x, do otrzymanej odleglosci dodajemy wage krawedzi w(x,y), robimy to dla kazdej krawedzi (Ewentualnie mozna jakos przyspieszyc i chodzic tylko po cykli, skoro i tak bd mieli duza zlozonosc)
-    --> O(ElogV)
+    --> O(E^2logV)
 
  """
