@@ -9,6 +9,6 @@ drugim przypadku nie uda się uzyskać algorytmu liniowego. 
 1. ... (Nagranie)
 
 1. Rozw dla grafow rzadkich:
-    W sposob banalny usuwamy krawedz (x,y) i puszczamy algorytm Dijkstry z y do x, 
+    W sposob banalny usuwamy krawedz (x,y) i puszczamy algorytm Dijkstry z y do x, do 
 
  """
