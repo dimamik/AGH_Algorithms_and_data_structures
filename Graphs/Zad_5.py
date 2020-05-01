@@ -1,3 +1,13 @@
+""" 
+Zwykly Dijkstra ale zamiast brać sumę, bierzemy sumę logaryfmow
+log(a)+log(b)=log(ab)
+
+ """
+
+
+
+
+
 from heapq import *
 """ 
 Implementacja na listach incydencji, wykorzystuje krotki postaci:

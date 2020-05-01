@@ -5,7 +5,9 @@
     --> O(E^2 logV )
 2. Rozw dla grafow gestych
      Idziemy Floydem-Warshallem, dla kazdego wierzcholku probujemy przeprowadzic cykl przez kazdy inny wierzcholek w grafie i probujemy zminimalizowac Dp[i][k]+Dp[k][i]
+     
 
      -> O(V^3 +(V)^2)-->O(V^3)
  """
+
 
