@@ -1,7 +1,4 @@
 
-
-
-
 """ 
 Reprezentacja poprzez listy sąsiedstwa
 Implementacja poprzez tablice połączeń danego wierzchołku

@@ -1,0 +1,4 @@
+""" 
+Sortujemy malej±co i ...
+
+ """

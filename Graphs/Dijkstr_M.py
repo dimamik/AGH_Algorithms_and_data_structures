@@ -4,7 +4,6 @@ Implementacja na listach incydencji, wykorzystuje krotki postaci:
             (DISTANCE,INDEX,WAGA)
 
 ] """
-
 def LS_Krotki_graph_init(V,E):
     """ 
     Inicjalizacja grafu z krotkami
