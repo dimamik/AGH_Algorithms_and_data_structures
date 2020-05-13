@@ -1,0 +1,25 @@
+""" 
+Dzmitry Mikialevich
+ """
+
+""" 
+Twierdzenia i informacja dodatkowa
+
+_Tw. (WKW na Eulerowskosc, o stopniach wierzcholkow w Gradie Eulerowskim)
+Warunkiem koniecznym i wystarczającym na to by spójny graf nieskierowany był eulerowski jest parzystość stopni wszystkich wierzchołków.
+_Potrzebujemy sprawdzić, czy isnieje Cykl Eulera -> cykl przez wszystkie krawędzie, ale nie licząc krawędzi między oazami.
+
+Algorytm polega na:
+1. Łączeniu oazów za pomocą FindUnion w Unii w nast sposob: 
+Jak dwa oazy mają ścieżke przez inne oazy lub bezpośrednio jeden do drugiego-> są w jednej unii -> O(V * (log*)V) 
+
+2. Dalej łączymy oazy, znajdujące się w jednej unii usuwając krawędzi między sobą ale zachowując krawędzi do miast (nawet jak się bedą powtarzali) -> O(V) 
+
+2. Dalej Dla każdego z oazów w jednej Unii liczymy stopień sumaryczny (nie bedą tu wliczane krawędzi między oazami bo poprzednio ich usunęliśmy). Jak stopień jest liczbą nieparzystą, zwracamy Fałsz, jak dla każdej Unii stopień będzie parzysty -> Zwracamy True. ->O(kE), gdzie k- liczba oazów, E-liczba krawędzi w grafie 
+
+Całkowita złożoność -> O(kE)
+
+
+Połączone oazy możemy traktować jako wspólny wierzcholek, bo przez nich mozemy dowolnie sie przemieszczac. A skoro tak jest, wystarczy odpowiedziec na pytanie, czy da się przejść przez wszystkie miasta używając pozostale krawedzi tylko raz -> A to jest Problem Czy istnieje Cykl Eulera w grafie nieskierowanym.
+
+ """

@@ -1,0 +1,18 @@
+""" 
+Dzmitry Mikialevich
+ """
+
+""" 
+Algorytm polega na:
+1. Sortujemy klocki po początkach (Skoro są różne, do da się jednoznacznie wyznaczyć pierwszy i nie da się na niego nic umiescic z gory, ustawmy jego "poziom" na 0) Niech jego koniec to B
+2. Idziemy po klockach i bierzemy z minimalnym początkiem (bo jak go nie wybierzemy nie bedziemy mogli go ulozyc pozniej, bo to miejsce bedzie "wolne, dziurą") i jak by usuwamy te, ktore uzylismy (z naszej posortowanej listy). Kazdemu uzytemu klocku przepisujemy poziom (0,1,2,...)
+Dodajemy klocki z tego poziomu do końcowej tablicy (struktury przechow. klocki)
+3. Powtarzamy punkt 2. ,ale z juz wiekszym poziomem, i przed tym, jak ulozyc jakis klocek, sprawdzamy, czy nie psuję ten klocek nic w poprzednim poziomie, robimy to w nast sposob:
+    1) Sprawdzamy, czy coś leży na poprzednim, już posortowanym i ułożonym poziomie:
+    Jak nie ma tam nic, lub nie w calosci sie pokrywaja-> Nie da się zbudować, bo za każdym razem robimy greedy choice, czyli wybieramy najlepszą z możliwych opcji (Bo np jak by wzielismy cos innego, to popelnilismy blad robiac dziure w poziomie na ktorym jestesmy i nie moglibysmy jej naprawic na wyzszych poziomach, bo to co wybieramy jest najmniejsze)
+    
+    Jak tam lezy jakis wiekszy badz rowny klocek -> Wszyskto jest ok, idziemy dalej
+ 
+Zlozonosc ->O(n^2) 
+
+"""

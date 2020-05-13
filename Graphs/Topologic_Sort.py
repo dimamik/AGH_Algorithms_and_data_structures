@@ -52,6 +52,7 @@ def DFS( G ):
     tab=[0]*len(tab_ready)
     for  i in range(len(tab_ready)):
         tab[i]=tab_ready[i].index_parrent
+    Sorted_Vertex.reverse()
     print(Sorted_Vertex)
     return tab
 
