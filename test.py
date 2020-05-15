@@ -1,7 +1,4 @@
-x = int (input())
-print(x)
-
-
-
+import os
+os.system()
 
 
