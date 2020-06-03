@@ -5,6 +5,7 @@ class IntervalTreeNode():
         self.right=None
         self.intervals=None
         self.val=val
+
 def PrintBST(root):
     """ 
     Function to print BST tree as a sorted array
@@ -45,7 +46,10 @@ def MinValIntervalTreeNode(IntervalTreeNode):
         tmp = tmp.left
     return tmp
 
+""" 
+Преобразовать посортированный массив в сбалансированное бст дерево
 
+ """
 def Delete(root, val_to_del):
     if root == None:
         return root
@@ -73,16 +77,8 @@ def sortedArrayToBST(arr):
         return None
     # find middle 
     mid = (len(arr)) // 2
-      
-    # make the middle element the root 
-    root = IntervalTreeNode(arr[mid]) 
-      
-    # left subtree of root has all 
-    # values <arr[mid] 
+    root = IntervalTreeNode(arr[mid])  
     root.left = sortedArrayToBST(arr[:mid]) 
-      
-    # right subtree of root has all  
-    # values >arr[mid] 
     root.right = sortedArrayToBST(arr[mid+1:]) 
     return root 
 def AddLeafsToTree(BSTRoot,BSTprev,is_left):
@@ -111,7 +107,7 @@ def FromPrzedzalsToTree(tab):
         tab_of_numbers.append(tab[i][1])
     tab_of_numbers=sorted(set(tab_of_numbers))
     BSTRoot=sortedArrayToBST(tab_of_numbers)
-    AddLeafsToTree(BSTRoot,None,-1)
+    #AddLeafsToTree(BSTRoot,None,-1)
     PrintBST(BSTRoot)
     
 
