@@ -4,6 +4,7 @@ le zawierają pole z liczbą węzłów w danym poddrzewie. Proszę opisać jak w
 następujące operacje:
 1. znalezienie i-go co do wielkości elementu,
 2. wyznaczenie, którym co do wielkości w drzewie jest zadany węzeł
+Wersja bez modyfikacji
  """
 
 class Node:
