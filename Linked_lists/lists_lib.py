@@ -341,9 +341,9 @@ X.make_from_array(arr)
 tab = X.Bucket_Sort()
 print(tab.print_list_as_tab())
 
-                                                                        """ 
-                                                                        Made by Dzmitry Mikialevich
-                                                                        """
+""" 
+Made by Dzmitry Mikialevich
+"""
 
 
 

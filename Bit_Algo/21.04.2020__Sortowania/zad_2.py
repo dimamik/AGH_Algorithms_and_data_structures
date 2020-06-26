@@ -19,7 +19,12 @@ def Binary_Search_Recursive(tab, el_searching, start=0, end=-1):
         return Binary_Search_Recursive(tab, el_searching, start, mid)
     elif tab[mid] < el_searching:
         return Binary_Search_Recursive(tab, el_searching, mid+1, end)
-for i in range(10):
-    x= int (input())
-    print(Binary_Search_Recursive([0,1,2,3,4,5,6,7,8,9,10],x))
-print(Binary_Search_Recursive([1,2,3,7,9,15],15))
+
+def zad_2(m,n):
+    m=sorted(m)
+    for i in range(len(n)):
+        if Binary_Search_Recursive(m,n[i])!=-1:
+            return "Nie"
+    return "Tak, rozłączne"
+
+print(zad_2([9,0,6],[1,2,0,3,4,5,456]))

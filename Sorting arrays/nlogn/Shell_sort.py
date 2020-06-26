@@ -1,4 +1,4 @@
-# Python3 program for implementation of Shell Sort
+# 
 # Улучшенный insertion sort
 
 def shellSort(array, n):

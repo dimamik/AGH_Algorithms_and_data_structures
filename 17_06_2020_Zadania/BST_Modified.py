@@ -8,7 +8,7 @@ Wersja bez modyfikacji
  """
 
 class Node:
-    def __init__(self,val=None,v=None):
+    def __init__(self,val=None,v=1):
         self.left=None
         self.right=None
         self.val=val
@@ -20,20 +20,22 @@ def PrintBST(root):
      """
     if root:
         PrintBST(root.left)
-        print(root.val)
+        print("Val=",root.val,"losc elementów w poddrzewie: ",root.v)
         PrintBST(root.right)
-
-
 def Insert(root, node_to_insert):
     if root == None:
         root = node_to_insert
     else:
+        #Added incrementation of v
+        root.v+=1
         if node_to_insert.val > root.val:
+            
             if root.right == None:
                 root.right = node_to_insert
             else:
                 Insert(root.right, node_to_insert)
         else:
+            
             if root.left == None:
                 root.left = node_to_insert
             else:
@@ -97,20 +99,48 @@ def Zad(root,i):
     
 
 
-r = Node(19,12) 
+
+def FindParent(root,node_to_find_parent):
+    if root == None or root.left == node_to_find_parent or root.right==node_to_find_parent:
+        return root
+    if root.val > node_to_find_parent.val:
+        return FindParent(root.left, node_to_find_parent)
+    elif root.val < node_to_find_parent.val:
+        return FindParent(root.right, node_to_find_parent)
+    pass
+
+def KtoryCoDoWielkosci(node, parent,root):
+    """ 
+    Ewentualnie potrzebuje pola parent, żeby zobaczyć, jakim dzieckiem jestem
+     """
+    i=0
+    if node.right!=None:
+        i+=node.right.v
+    if parent!=None:
+        if parent.val>node.val:
+            i+=root.v
+            if node.left!=None:
+                i-=node.left.v
+    return i
+
+
+r= Node(5)
+p_s=Node(3)
+Insert(r,p_s)
+s=Node(2)
+Insert(r,s)
+Insert(r,Node(15))
+print("Ktory co do wielkosci:")
+print(KtoryCoDoWielkosci(s,FindParent(r,s),r))
+""" print(FindParent(r,s).val) """
+""" r = Node(19,12) 
 Insert(r,Node(10,7)) 
 Insert(r,Node(21,4)) 
-Insert(r,Node(3,3)) 
-Insert(r,Node(12,3)) 
-Insert(r,Node(21,4)) 
-Insert(r,Node(20,1))
-Insert(r,Node(36,2)) 
-Insert(r,Node(74,1)) 
-Insert(r,Node(1,1)) 
-Insert(r,Node(7,1)) 
-Insert(r,Node(11,1)) 
-Insert(r,Node(18,1)) 
 
-PrintBST(r)    
+
 k=int (input())
 print(Zad(r,k))
+"""
+
+PrintBST(r)    
+
