@@ -21,6 +21,5 @@ def BFS(G,s):
                 Q.put(v)
 
 X=Input_MSGraph()
-
 BFS(X,0)
     

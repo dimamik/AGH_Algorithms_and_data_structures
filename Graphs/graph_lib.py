@@ -1,4 +1,3 @@
-
 """ 
 Reprezentacja poprzez listy sąsiedstwa
 Implementacja poprzez tablice połączeń danego wierzchołku
@@ -12,7 +11,6 @@ class Vertex():
         self.waga=0
         self.distance=float("inf")
         self.d=0
-
 
 def Polacz_Wierzch_ls(tab,index_wierz):
     return tab[index_wierz]
@@ -59,7 +57,9 @@ def Input_MSGraph():
         tab[i]=[0]*n
     for i in range(len(tab)):
         for j in range(len(tab)):
-            tab[i][j]=int (input())
+            s=Vertex
+            s.index=int (input())
+            tab[i][j]=s
     return tab
 
     
