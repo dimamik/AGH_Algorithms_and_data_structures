@@ -252,14 +252,7 @@ def MostyDFS(tab_of_v):
         tab_l[i]=tab_of_v[i].low
     return tab_of_mosts
 
-""" tab_v=BuildFromInc([[1,2],[0,2,3],[0,1],[1,4,5],[3,5],[3,4]])
+tab_v=BuildFromInc([[1,2],[0,2,3],[0,1],[1,4,5],[3,5],[3,4]])
 tab_v=BuildFromInc([[1,3],[0,2],[1,3,4],[0,2,7],[2,5,6],[4,6],[4,5],[3]])
-print(MostyDFS(tab_v)) """
+print(MostyDFS(tab_v))
 #print(DFS_Parent_and_Wsteczne(tab_v))
-
-
-
-
-
-
-""" Punkty artykulacji """

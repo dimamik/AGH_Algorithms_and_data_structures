@@ -47,3 +47,5 @@ def DFS( G ):
     for  i in range(len(tab_ready)):
         tab[i]=tab_ready[i].index_parrent
     return tab
+
+print(DFS([[1,4],[2],[3],[],[]]))

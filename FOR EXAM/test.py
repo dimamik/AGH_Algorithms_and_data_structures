@@ -1,6 +1,3 @@
-n=5
-Buckets=[[] for _ in range(n+1)]
-
-print(Buckets)
-
-
+tab=set()
+tab.append(5)
+print(tab)

@@ -10,5 +10,8 @@ def maximumGap(self, num):
             b[1] = n if b[1] is None else max(b[1], n)
         bucket = [b for b in bucket if b[0] is not None]
         return max(bucket[i][0]-bucket[i-1][1] for i in range(1, len(bucket)))
-G=maximumGap  
-print(maximumGap(G,[7,20,2,15,1])
+""" G=maximumGap  
+print(maximumGap(G,[7,20,2,15,1]) """
+
+
+print(min(1,2,3))
