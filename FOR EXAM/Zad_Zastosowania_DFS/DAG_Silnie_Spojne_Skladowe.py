@@ -100,7 +100,6 @@ def SilneSpojneSkladowe(tab_of_v):
 
     """ Odwrocenie kierunku """
     tab_of_v=OdwrocKierunekKrawedzi(tab_of_v)
-
     to_ret=[]
     count=0
     """ DFS W KOLEJNOSCI MALEJACYCH CZASOW """

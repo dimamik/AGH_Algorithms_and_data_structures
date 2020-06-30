@@ -263,3 +263,4 @@ print(MostyDFS(tab_v)) """
 
 
 """ Punkty artykulacji """
+""" ... """

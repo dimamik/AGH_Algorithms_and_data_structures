@@ -3,7 +3,7 @@ from heapq import *
 Implementacja na listach incydencji, wykorzystuje krotki postaci:
             (DISTANCE,INDEX,WAGA)
 
-] """
+"""
 def LS_Krotki_graph_init(V,E):
     """ 
     Inicjalizacja grafu z krotkami
@@ -61,7 +61,7 @@ def DijkstraAlgorithm(graph,start,end):
     print("O(",counter,")")
     print(parent_graph)
     return distance_graph[end]
-graph =LS_Krotki_graph_init(6,7)
+graph =LS_Krotki_graph_init(4,3)
 DijkstraAlgorithm(graph,0,3)
 
 
