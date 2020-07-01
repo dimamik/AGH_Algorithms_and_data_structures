@@ -50,7 +50,29 @@ def FindiMinEl(root,i):
         elif root.left.index+1>i:
             return FindiMinEl(root.left,i)
     return None
-    pass
+ilosc=0
+def zadb(root,key):
+    global ilosc
+    """ 
+    Wyznaczenie, którym co do wielkości w drzewie jest zadany węzeł
+     """
+    if FindBST(root,key)==None:
+        return None
+    while root!=None:
+        if root.key==key:
+            l=1
+            if root.left!=None:
+                l+=root.left.index
+            return ilosc+l
+        elif root.key<key:
+            ilosc+=(1+root.left.index)
+            return zadb(root.right,key)
+        elif root.key>key:
+            return zadb(root.left,key)
+    return ilosc
+
+
+    
 
 r = Node(15,8)
 x=Node(10,3)
@@ -68,4 +90,6 @@ p.left=m
 o=Node(30,1)
 k.right=o
 PrintTheTree(r)
+
 print(FindiMinEl(r,8).key)
+print(zadb(r,17))
