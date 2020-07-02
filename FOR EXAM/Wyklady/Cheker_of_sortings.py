@@ -28,4 +28,4 @@ def Checker(SortingFunc,k=150):
 
 
 
-Checker(sorted,1000)
+Checker(sorted,100)

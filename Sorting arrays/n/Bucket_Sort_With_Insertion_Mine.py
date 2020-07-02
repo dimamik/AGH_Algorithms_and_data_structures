@@ -1,3 +1,6 @@
+""" NOT WORKING WITH INSERTION SORT """
+
+
 def Bucket_Sort(tab,n=False):
     """ 
     Dziala tylko dla jednostajnego rozkladu danych z przedziaÅ‚u
@@ -35,8 +38,3 @@ def Bucket_Sort(tab,n=False):
         for j in range(len(Buckets[i])):
             to_return.append(Buckets[i][j])
     return to_return
-
-
-
-
-

@@ -1,4 +1,7 @@
-#Defenitions for heap from 0 withoit size in arr[0]
+
+
+""" Defenitions for heap from 0 withot size in arr[0] """
+
 def parent(i):return (i-1)//2
 def left(i): return (i*2)+1
 def right(i): return (i*2) + 2
@@ -53,7 +56,9 @@ nie robisz duzo razy to same)
     return tab
 
 
-#Definitions with heap from 1
+
+""" Definitions with heap from 1 """
+
 def parent_from_1(i):return i//2
 def left_from_1(i): return i*2
 def right_from_1(i): return i*2 + 1

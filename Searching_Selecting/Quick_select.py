@@ -8,23 +8,66 @@ def Lomuto_part(tab,low,high):
     tab[curr_index+1],tab[high]=tab[high],tab[curr_index+1]
     return curr_index+1
 
-def kthSmallest(tab,k,l,r): 
+
+def QuickSelect(tab,k,start=0,end=-1):
     """ 
-    Dziala rekursywnie wiec nie da sie zamienic l i r
+    Znajduje wartosc pod (k-tym indeksem)+1 w posortowanej tablice
+    k in [1,len(tab)]
+    Zwraca None jeÅ›li k nie pasuje warunkom wyzej
      """
-    if (k > 0 and k <= r - l + 1): 
-  
+    if k>len(tab) or k<=0 :
+        return None
+    if end==-1:
+        end=len(tab)-1
+    pivot_index=Lomuto_part(tab,start,end)
+    if k-1==pivot_index-start:
+        return tab[pivot_index]
+    if k-1>pivot_index-start:
+        """ Wchodze w prawo """
+        return QuickSelect(tab,k-pivot_index+start-1,pivot_index+1,end)
+    else:
+        return QuickSelect(tab,k,start,pivot_index-1)
+    return None
 
-        index = Lomuto_part(tab, l, r) 
+print(QuickSelect([2,5,1,8,3,6,0,0,0],4))
 
-        if (index - l == k - 1): 
-            return tab[index] 
 
-        if (index - l > k - 1): 
-            return kthSmallest(tab, l, index - 1, k) 
- 
-        return kthSmallest(tab, index + 1, r,  
-                            k - index + l - 1) 
-    return float("inf") 
 
-print(kthSmallest([2,5,1,8,3,6],0,5,3))
+
+
+
+
+
+""" TESTING MODULE"""
+from random import *
+import time
+def Timer(func):
+    def wrapper(*args,**kwargs):
+        tic = time.perf_counter()
+        output=func(*args,**kwargs)
+        toc = time.perf_counter()
+        print(toc)
+        return output
+    return wrapper
+@Timer
+def Checker(SortingFunc,k=150):
+    positive=0
+    all=k
+    for i in range(k):
+        tab=[]
+        s=randint(10,999)
+        for i in range(s):
+            tab.append(randint(0,999))
+        k=randint(0,len(tab)-1)
+        return_from_funct=SortingFunc(tab,k+1)
+        if return_from_funct==sorted(tab)[k]:
+            print("Test passed")
+            positive+=1
+        else:
+            """ print(return_from_funct,sorted(tab)) """
+            print("Test Failed")
+    print("ALL TESTS PASSED WITH A SCORE", positive,"/",all)
+
+#Checker(QuickSelect,100)
+
+
