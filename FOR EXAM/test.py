@@ -1,7 +1,7 @@
-i=0
-while i<5:
-    print("HEJ")
-    i+=1
-else:
-    print("HAJ")
-    i=0
+from queue import *
+
+Q=Queue()
+
+Q.put(4)
+Q.put(5)
+print(Q.get())

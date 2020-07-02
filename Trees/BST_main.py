@@ -6,11 +6,12 @@ class Node:
     """ 
     Should predefine value
      """
-
     def __init__(self, val):
         self.left = None
         self.right = None
         self.val = val
+        self.parent=None
+
 
 def PrintBST(root):
     """ 
@@ -20,23 +21,30 @@ def PrintBST(root):
         PrintBST(root.left)
         print(root.val)
         PrintBST(root.right)
+def PrintParent(root):
+    if root:
+        PrintBST(root.left)
+        print(root.val, root.parent)
+        PrintBST(root.right)
 
-
-def Insert(root, node_to_insert):
+def Insert(root, node_to_insert,parent=None):
+    
     if root == None:
         root = node_to_insert
     else:
         if node_to_insert.val > root.val:
             if root.right == None:
                 root.right = node_to_insert
+                node_to_insert.parent=root.val
             else:
-                Insert(root.right, node_to_insert)
+                Insert(root.right, node_to_insert,root)
+                
         else:
             if root.left == None:
                 root.left = node_to_insert
             else:
-                Insert(root.left, node_to_insert)
-
+                Insert(root.left, node_to_insert,root)
+    
 
 def Search(root, val_to_search):
     if root == None or root.val == val_to_search:
@@ -79,12 +87,14 @@ def Delete(root, val_to_del):
 
 r = Node(50) 
 Insert(r,Node(30)) 
+PrintParent(r)
 Insert(r,Node(20)) 
 Insert(r,Node(40)) 
 Insert(r,Node(70)) 
 Insert(r,Node(60)) 
 Insert(r,Node(80))
 Delete(r,50)
-PrintBST(r)    
+PrintParent(r)
+
 
 print(Search(r,50))
