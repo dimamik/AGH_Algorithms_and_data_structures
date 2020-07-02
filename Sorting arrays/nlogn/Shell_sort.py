@@ -1,6 +1,6 @@
 # 
 # Улучшенный insertion sort
-
+""" UWAGA """
 def shellSort(array, n):
     gap = n // 2
     while gap > 0:

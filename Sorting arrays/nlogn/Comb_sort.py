@@ -1,3 +1,6 @@
+""" !!UWAGA!! """
+
+
 #Comb sort is improoved Bubble sort (with the help of lenght of swap >1)
 #The gap starts with a large value and shrinks by a factor of 1.3 in every 
 #iteration until it reaches the value 1. Thus Comb Sort removes 

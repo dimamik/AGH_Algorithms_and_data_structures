@@ -1,3 +1,8 @@
+""" NOT WORKING """
+
+
+
+
 def merge(tab,p,sr,k):
     # Uwaga, sr is included in left_tab
     i=p
@@ -32,7 +37,7 @@ def merge_sort(tab,p,k):
     return tab
 
 
-print(merge_sort([1,3,5,7,2,4,6,8],0,7))
+print(merge_sort([1,3,1,7,2,4,6,8],0,7))
         
 
 

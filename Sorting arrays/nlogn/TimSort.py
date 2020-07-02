@@ -1,3 +1,7 @@
+
+""" UWAGA """
+
+
 #TimSort is a sorting algorithm based on Insertion Sort and Merge Sort.
 #We one by one sort pieces of size equal to run
 #After sorting individual pieces, we merge them one by one.

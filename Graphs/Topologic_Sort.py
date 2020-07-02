@@ -19,7 +19,7 @@ def tab_to_Wierz(tab):
         tmp[i]=Wierzcholek(i,tab[i],None)
     return tmp
 
-
+time=0
 def DFSVisit(u,time,tab_ready,Sorted_Vertex):
     
         time+=1

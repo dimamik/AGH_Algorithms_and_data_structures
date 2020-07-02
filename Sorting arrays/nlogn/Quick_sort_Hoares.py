@@ -18,11 +18,46 @@ def Hoare_part(tab,low,high):
         #wracamy wartosc j ktora jest ustawiona na el kotory "presortowany"
             return j
 
-def q_sort(tab,low,high):
+def Quick_Sort(tab,low=0,high=-1):
+    if high==-1:
+        high=len(tab)-1
     if low<high:
         piv_idex=Hoare_part(tab,low,high)
-        q_sort(tab,low,piv_idex)
-        q_sort(tab,piv_idex+1,high)
-tab=[17,3,17,20,0,17]
-q_sort(tab,0,5)
+        Quick_Sort(tab,low,piv_idex)
+        Quick_Sort(tab,piv_idex+1,high)
+    return tab
+tab=[17,3,17,20,0,17,0,1,1546,0,15]
+Quick_Sort(tab)
 print(tab)
+
+
+""" TESTING """
+from random import *
+import time
+def Timer(func):
+    def wrapper(*args,**kwargs):
+        tic = time.perf_counter()
+        output=func(*args,**kwargs)
+        toc = time.perf_counter()
+        print(toc)
+        return output
+    return wrapper
+@Timer
+def Checker(SortingFunc,k=150):
+    positive=0
+    all=k
+    for i in range(k):
+        tab=[]
+        s=randint(10,999)
+        for i in range(s):
+            tab.append(randint(0,999))
+        return_from_funct=SortingFunc(tab)
+        if return_from_funct==sorted(tab):
+            print("Test passed")
+            positive+=1
+        else:
+            """ print(return_from_funct,sorted(tab)) """
+            print("Test Failed")
+    print("ALL TESTS PASSED WITH A SCORE", positive,"/",all)
+
+#Checker(Quick_Sort,100)

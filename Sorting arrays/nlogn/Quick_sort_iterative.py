@@ -1,17 +1,17 @@
+""" !!WARNING!! """
+
 def partition(arr, l, h): 
 	i = ( l - 1 ) 
 	x = arr[h] 
 
 	for j in range(l, h): 
 		if arr[j] <= x: 
-
 			# increment index of smaller element 
 			i = i + 1
 			arr[i], arr[j] = arr[j], arr[i] 
-
 	arr[i + 1], arr[h] = arr[h], arr[i + 1] 
 	return (i + 1) 
-def q_sort(tab,l,r):
+def q_sort(tab,l=0,r=-1):
     stack = [0] * (r-l+1)
     top = -1
     top+=1

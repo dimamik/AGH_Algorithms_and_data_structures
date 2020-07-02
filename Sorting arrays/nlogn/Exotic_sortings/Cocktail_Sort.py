@@ -1,3 +1,5 @@
+""" !UWAGA! """
+
 # Variation of Bubble Sort  
 # Cocktail Sort traverses through a given array in both directions alternatively. 
 def cocktailSort(a): 
