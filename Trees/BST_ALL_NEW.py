@@ -126,6 +126,8 @@ def DeleteBST(root,key_to_del):
     """ hard implementation if we are taking care of parents """
     
     pass
+
+
 """ r=Node(15)
 Insert(r,Node(10))
 Insert(r,Node(16))
