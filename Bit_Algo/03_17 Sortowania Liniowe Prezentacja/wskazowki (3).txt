@@ -1,0 +1,59 @@
+Zadanie 1
+https://ita.skanev.com/08/04/04.html
+
+Zadanie 2
+UWAGA: zapomnieliśmy to zaznaczyć w treści, ale sortujemy NAJPIERW po długościach, a PÓŹNIEJ leksykograficznie!
+Przykładowo: bab jest PRZED aaaaa, natomiast aaaab jest PO aaaaa.
+
+Najpierw robimy bucket sorta po długościach stringów (można np. najpierw zrobić z napisów krotki (len(napis), napis) i sortować 
+po pierwszym elemencie krotek). Wtedy każdy bucket zawiera stringi tej samej długości - idealna sytuacja dla radix sorta. Na koniec 
+scalamy wyniki.
+
+Zadanie 3
+Bucket sort, ale trzymamy także informację o wielkości każdego kubełka - kiedy dodanie kolejnego elementu sprawi, że dany kubełek 
+będzie rozmiaru przynajmniej n/2, to zwracamy True.
+
+Zadanie 4
+Ważne, że tylko metoda ma mieć złożoność O(1) - np. w konstruktorze możemy zrobić dowolny preprocessing danych, jaki tylko chcemy.
+Użyjemy counting sorta, ale bez sortowania - zatrzymujemy się na etapie, w którym dostajemy cumulative counts. Wystarczy dla tej 
+tablicy zwracać wartość cumul_sum[b] - cumul_sum[a] - można to zrozumieć przez analogię do całkowania: cumul_sum[a] to jak całka 
+oznaczona w przedziale [0, a], cumul_sum[b] to jak całka oznaczona w przedziale [0, b], a ta różnica to "całka" [a, b], czyli to, co 
+nas interesuje.
+
+Zadanie 5
+Dzielimy tablicę na dwie - te "psujące" 10 elementów i te posortowane (pamiętamy o tym, żeby nie zmienić kolejności!). Sortujemy tę 
+10-elementową tablicę (czymkolwiek, bo to czas stały) i je scalamy w czasie O(n).
+
+Zadanie 6
+Robimy tablicę pomocniczą rozmiaru O(log(n)), w której będziemy zliczać, ile jest "sztuk" każdego unikatowego elementu (np. jako 
+krotki (num, sztuki_num)). Iterujemy po naszej wejściowej tablicy i za każdym razem robimy binary search po naszej pomocniczej 
+tablicy (ma złożoność O(log(log(n))), co łatwo sprawdzić). Jeżeli poszukiwany element już tam jest, to zwiększamy jego liczbę, a 
+jeżeli nie, to "przesuwamy" tablicę - wszystko, co jest na prawo od niego przesuwamy o 1 element w prawo. Później w tym "zwolnionym" 
+miejscu wstawiamy nasz nowy element, np. jako (new_num, 1). Na koniec wystarczy przepisać elementy po kolei do naszej wejściowej 
+tablicy, bo dzięki binary searchowi nasza pomocnicza tablica jest posortowana (według kluczy, np. pierwszego elementu krotki).
+UWAGA: jeżeli obchodzi nas oczekiwana złożoność, a nie pesymistyczna, to można też użyć słownika (hashmap).
+
+Zadanie 7
+Należy najpierw posortować countingiem liczby według ich reszty dzielenia przez n^2 a potem też countingiem według ich
+wyniku dzielenia (całkowitoliczbowego) przez n^2.
+
+Zadanie 8
+Po prostu bucket sort, tylko, że z łańcuchem :)
+
+Zadanie 9
+Należy potraktować litery alfabetu, jako cyfry systemu liczbowego. Wtedy podciągi o długości k będą liczbami z zakresu od
+0 do E^K-1. możemy zatem E^K początkowych pozycji naszego słowa wykorzystać do przechowywania liczników liczb odpowiadających odpowienim indeksom. Zeby nie niszczyć naszego słowa to po indeksem i przechowujemy K*(licznik wystąpień liczby i ) + wartość litery
+w początkowym słowie pod indeksem i. Wtedy możemy po zakończeniu operacji przywrócić początkową zawartość słowa poprzez operację
+%.
+
+Zadanie 10
+Należy przygotować tablicę o rozmiarze n. Następnie dla kązdej liczby iterować po wartościcach od 2 do sqrt(liczba)
+i inkrementować występienia odpowiednich dzielników w tablicy pomocniczej. największa wartość w tablicy pomocniczej jest rozwiązaniem.
+
+Zadanie 11
+Potrzeba 3 dodatkowych stosów. ściągamy z początkowego stosu tak długo jak są posortowane i idkładamy na drugi stos. Potem tak
+samo na trzeci stos. Te da stosy scalamy na czwarty stos. Powtarzamy takie ściąganie list naturalnych aż pierwszy stos będzie pusty.
+Wtedy czwarty stos staje się pierwszy i operację kontynuujemy, aż ściągniećie listy naturalnej będzie ściągnięciem całego stosu.
+
+Zadanie 12
+Każdy punkt jest początkiem lub końcem danego odcinka. Sortujemy punkty według współrzędnej x. Przechodzimy te punkty w takiej kolejności rejestrując za kązdym razem w ile odcinków weszliśmy i z ilu wyszliśmy.
