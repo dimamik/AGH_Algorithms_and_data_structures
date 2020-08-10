@@ -11,6 +11,10 @@ def Bucket_Sort(tab,n=False):
     Ilosc Bucketow ->     Max_el/rozd_Bucketa=ilosc_elementow
     ind Bucketa dla el -> El/rozd_Bucketa
      """
+
+    """ 
+    Mo?na doda? normalizacj?: Przesuni?cie wszystkich elementów tak, ?eby by?y od 0
+     """
     max_el=max(tab)
     if n==False:
         n=len(tab)
