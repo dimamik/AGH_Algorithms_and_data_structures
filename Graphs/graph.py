@@ -124,12 +124,55 @@ class graph:
         output+="Graph has "+ str(len(self.repr)) + " vertices"+"\n"
         output+="Graph has "+ str(self.get_edges()) + " edges"
         return output
-
+    def remove_edge_undirected(self,u,v):
+        """ Removes edge (u,v) in E """
+        if self.is_weighted==True:
+            raise "NEED UNWEIGHTED GRAPH"
+        if self.is_Matrix==True:
+            self.repr[u][v] = 0
+            self.repr[v][u] = 0
+        else:
+            i = 0
+            while (self.is_weighted==True  and self.repr[u][i][0]!=v 
+            or self.is_weighted==False and self.repr[u][i]!=v):
+                i+=1
+            if i<len(self.repr[u]):
+                self.repr[u].remove(v)
+                self.repr[v].remove(u)
+            else:
+                raise "NO SUCH EDGE"
+    def reverse_edges(self):
+        if self.is_Matrix==True:
+            graph_tmp = [[0]*self.get_vertex() for _ in range(self.get_vertex())]
+            for i in range(self.get_vertex()):
+                for j in range(self.get_vertex()):
+                    graph_tmp[i][j] = self.repr[i][j]
+            for i in range(len(graph_tmp)):
+                for j in range(len(graph_tmp[0])):
+                    if (graph_tmp[i][j]!=0):
+                        self.repr[i][j] = 0
+                        self.repr[j][i] = graph_tmp[i][j]
+        else:
+            graph_tmp = [[] for _ in range(self.get_vertex())]
+            for i in range(len(graph_tmp)):
+                for j in range(len(self.repr[i])):
+                    graph_tmp[i].append(self.repr[i][j])
+            if self.is_weighted==True:
+                raise "NOT READY YET"
+            for i in range(len(graph_tmp)):
+                j = 0
+                while (len(graph_tmp[i])>0):
+                    tmp = graph_tmp[i][j]
+                    graph_tmp[i].remove(tmp)
+                    self.repr[i].remove(tmp)
+                    self.repr[tmp].append(i)
+            
 
 def BFS(graph, start_v):
     """ 
-    Searching Algorithm working in Breadth 
-    O(V+E)
+    Searching Algorithm working in Breadth, works only with non-weighted vertecies\n
+    ->O(V+E)
+    Returns: distance,parents\n
     For given non-weighted graph and start_v returns distance from start_v to each of the other vertecies and parents in this distance.
         Is based on the fact that there is no shorter path than current because of the equal weights.
         Can be improved and transformated to the weighted but small integers by dividing into the ones with weight=1\n
@@ -176,7 +219,7 @@ def BFS_01(graph,start_v):
     Given graph with 0/1 weights
     Finding the shortest path from start_v to each other vertex
     Using double queue and put 0 vertecies to begining and 1 to the end\n
-
+    Returns: shortest distance from start_v to each of V\n
     g3 = graph([
     [(1,1),(2,0)],
     [(0,1),(2,0)],
@@ -217,11 +260,12 @@ def BFS_01(graph,start_v):
                 else:
                     Double_Queue.append(v)
     return distance,parents
-def DFS(graph,start_v):
+def DFS(graph,start_v=0):
     """ 
     Searching in depth algorithm
     O(V+E)\n
-    Can be used in various of situations like topological sort,finding mosts, etc.\n
+    Can be used in various of situations like topological sort,finding mosts, etc.
+    Returns: parents,process, where process is time when i=v (process[i]) is processed\n
     g1 = graph([
     [1,3,4],
     [3],
@@ -252,11 +296,14 @@ def DFS(graph,start_v):
     for v in graph.get_vertex_tab():
         if not visited[v]:
             DFSVisit(graph,v)
-    return parents
+    return parents,process
 def Topological_Sort(graph):
     """ 
     Sorting vertecies such thah if (u,v) in E, than u < v
-    Using Usual DFS and append to begining the processed vertecies
+    Using Usual DFS and append to begining the processed vertecies\n
+    -> O(V + E)\n
+    Returns: v in sorted order
+        [5,0,1,2,3,4]
     Example:
         g = graph([[1,2],[],[1,3,4],[1,4],[0]], is_Matrix=False, is_weighted=False)
         print(Topological_Sort)
@@ -275,4 +322,165 @@ def Topological_Sort(graph):
         if not visited[v]:
             DFSVisit(graph, v)
     return sorted_vertecies
-def Euler_Cykle(graph):
+def Euler_Cycle(graph):
+    """ 
+    Have undirected graph and mark edges as visited not vertecies
+    Return: The path in Euler Cycle 
+    [0,1,2,3,4,5,6,0] -> path
+    \n
+    -> O(V + E)\n
+    Example:
+        Wyklad_8_2_Graph = graph([
+        [1,5],
+        [0,5,6,2],
+        [1,6,4,3],
+        [2,4],
+        [5,6,2,3],
+        [0,1,6,4],
+        [1,2,4,5]
+        ],is_Matrix=False, is_weighted=False)
+        print(Euler_Cycle(Wyklad_8_2_Graph))
+     """
+    visited = [False] * graph.get_vertex()
+    Queue_FILO = []
+    edges_tmp = graph.get_edges()//2
+    prev_call = -1
+    def DFSVisit(graph,u):
+        nonlocal visited
+        nonlocal prev_call
+        for v in graph.get_incidence(u):
+            if v == prev_call:
+                continue
+            if not visited[v]:
+                graph.remove_edge_undirected(u,v)
+                prev_call = u
+                DFSVisit(graph,v)
+        if (graph.get_incidence(u) == []):
+            visited[u] = True
+        Queue_FILO.insert(0,u)
+
+    DFSVisit(graph,0)
+    if len(Queue_FILO)!=edges_tmp+1:
+        raise "BLAD"
+    return Queue_FILO
+def Silnie_Spojne_Skladowe(graph):
+    """ 
+    Strongly Connected Components\n
+    https://en.wikipedia.org/wiki/Strongly_connected_component
+
+    -> O(V + E)\n
+    Algorithm:
+        1. Use DFS to get times of processing of eqch vertex
+        2. Sort by the time of processing in decreasing order
+        3. Reverse every edge
+        4. DFS in decreasing time of processing and when v is entered by DFS, append it to this component. 
+            P.S. Each new DFS from main function creates new component
+    Return:
+        tab = [[0,1,2], [4,5], [3,6]], where 0,1,2 is v in strongly connected component and so on
+        len(tab) - how many of them there are in graph
+    Example:
+        g5 = graph(
+        [[1],
+        [2, 3],
+        [0, 5],
+        [4], [5],
+        [3]
+        ],is_Matrix=False
+        )
+        Silnie_Spojne_Skladowe(g5) 
+     """
+    usless,times = DFS(graph)
+    for i in range(len(times)):
+        times[i]=(times[i],i)
+    times_not_sorted=times[:]
+    times=sorted(times,reverse=True)
+    visited = [False] * graph.get_vertex()
+    entry = [-1] * graph.get_vertex()
+    process = [-1] * graph.get_vertex()
+    components = []
+    time = 0
+    graph.reverse_edges()
+    
+    def DFS_Needed_To_Make_Array(u_index,arr):
+        """ DFS THAT BUILD AN ARRAY OF VERT VISITED AND WORKS WITH DECREASING TIME """
+        nonlocal visited,times_not_sorted,graph,entry,time
+        arr.append(u_index)
+        visited[u_index]=True
+        entry[u_index]=time
+        tab_tmp=[]
+        for i in graph.get_incidence(u_index):
+            tab_tmp.append(times_not_sorted[i])
+        tab_tmp=sorted(tab_tmp)
+        for v_ind in map(lambda item: item[1], tab_tmp):
+            if not visited[v_ind]:
+                DFS_Needed_To_Make_Array(v_ind,arr)
+
+    for v_ind in map(lambda item: item[1], times):
+        if not visited[v_ind]:
+            arr=[]
+            DFS_Needed_To_Make_Array(v_ind,arr)
+            components.append(arr)
+    return components
+
+
+def Mosty_DFS(graph):
+    """ 
+    Input: graph nie skierowany nie ważony
+    Most -> krawedz, usuniecie ktorej powoduje rozspujnienie grafu\n
+    Returns: [(2, 4), (3, 7)], where 2,4 -> is an edge
+
+    O(V + E)\n
+    Example:
+        g = graph([[1, 3], [0, 2], [1, 3, 4], [0, 2, 7], [2, 5, 6], [
+        4, 6], [4, 5], [3]], is_Matrix=False, is_weighted=False)
+        print(Mosty_DFS(g))
+     """
+    def DFS_With_Low(graph):
+        time = 0
+        visited = [False] * graph.get_vertex()
+        parents = [-1] * graph.get_vertex()
+        entry = [-1] * graph.get_vertex()
+        low = [-1] * graph.get_vertex()
+        wsteczna = [-1] * graph.get_vertex()
+        process = [-1] * graph.get_vertex()
+
+        def DFS_Visit(u_index, graph):
+            nonlocal time, visited, parents, entry, low, wsteczna, process
+            time += 1
+            visited[u_index] = True
+            entry[u_index] = time
+            """ Default wartosc low """
+            low[u_index] = time
+            for v_ind in graph.get_incidence(u_index):
+                if not visited[v_ind] == True:
+                    parents[v_ind] = u_index
+                    DFS_Visit(v_ind, graph)
+                    """ Podnosze wartosc w gore drzewa DFS """
+                    low[u_index] = min(
+                        low[v_ind], low[u_index])
+                else:
+                    if parents[u_index] != v_ind:
+                        """ Krawędź wsteczna tu jest, bo już odwiedzony i nie rodzic,
+                        wiec uaktualizujemy low"""
+                        """ !!!UWAGA PORÓWNUJE Z ENTRY WSTECZNYM A NIE LOW!!! """
+                        low[u_index] = min(low[u_index], entry[v_ind])
+                        wsteczna[u_index] = v_ind
+            time += 1
+            process[u_index] = time
+
+        for v_ind in range(graph.get_vertex()):
+            if not visited[v_ind]:
+                DFS_Visit(v_ind, graph)
+        return entry, parents, low
+
+    entry, parents, low = DFS_With_Low(graph)
+    tab_of_mosts = []
+    for i in range(graph.get_vertex()):
+        if parents[i] != -1 and low[i] == entry[i]:
+            tab_of_mosts.append((parents[i], i))
+    if tab_of_mosts == []:
+        return "No Mosts Found"
+    return tab_of_mosts
+
+
+
