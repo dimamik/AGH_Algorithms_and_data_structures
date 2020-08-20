@@ -1,4 +1,4 @@
-from graph import *
+from Graph_Library.graph import *
 
 def BFS(graph, start_v):
     """ 

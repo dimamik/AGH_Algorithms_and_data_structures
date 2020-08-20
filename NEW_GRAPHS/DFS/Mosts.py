@@ -1,10 +1,3 @@
-class PseudoVertex():
-        """ 
-        Help-class to handle if (is_weighted==True and is_Matrix == False) case
-         """
-        def __init__(self, index=-1, weight=-1):
-            self.index = index
-            self.weight = weight
 class graph:
     def __init__(self, repr,is_Matrix,is_weighted=False ):
         """ 
@@ -41,23 +34,27 @@ class graph:
             ], is_Matrix=True, is_weighted=True)
             print(g) 
          """
-        self.is_Matrix = is_Matrix
         self.repr = repr
+        self.is_Matrix = is_Matrix
         self.is_weighted = is_weighted
         self.visited = [0] * len(self.repr)
         self.parents = [-1] * len(self.repr)
-        if (is_weighted == True and is_Matrix == False):
-            """ Making PseudoVertex to store weights """
-            for i in range(len(self.repr)):
-                for j in range(len(self.repr[i])):
-                    self.repr[i][j] = PseudoVertex(
-                        self.repr[i][j][0], self.repr[i][j][1])
+        
     def add_edge(self,u,v,w=-1):
-        if (self.is_Matrix==False and self.is_weighted==False):
-            self.repr[u].append(v)
-        else:
-            raise "NOT ADDED YET"
+            if (self.is_Matrix==False):
+                tmp = v
+                if (w!=-1):
+                    tmp = (v,w)
+                self.repr[u].append(tmp)
+            else:
+                tmp = 1
+                if (w!=-1):
+                    tmp = w
+                self.repr[u][v]=tmp
     def get_edges(self):
+        """ 
+        Returns number of edges
+         """
         edges = 0
         if (self.is_Matrix==True):
             for i in range(len(self.repr)):
@@ -69,26 +66,31 @@ class graph:
                 edges+=len(self.repr[i])
         return edges
     def get_vertex(self):
+        """ 
+        Returns number of vertecies
+         """
         return len(self.repr)
     def get_incidence(self,u):
+        """ 
+        Returns tab of childs of u (V which u is connected with)
+         """
+        tmp = []
         if (self.is_Matrix==True and self.is_weighted==False):
-            tmp = []
             for v in range(len(self.repr[u])):
                 if (self.repr[u][v]!=0):
                     tmp.append(v)
-            return tmp
         elif (self.is_Matrix==False and self.is_weighted==False):
             return self.repr[u]
         elif (self.is_Matrix==False and self.is_weighted==True):
-            tmp = []
             v = u
             for j in range(len(self.repr[v])):
-                tmp.append((self.repr[v][j].index, self.repr[v][j].weight))
-            return tmp
+                tmp.append((self.repr[v][j][0], self.repr[v][j][1]))
         else:
-            raise "NOT ADDED YET" 
-    def get_vertex_tab(self):
-        return range(self.get_vertex())
+            for i in range(self.get_vertex):
+                for j in range(self.get_vertex):
+                    if (self.repr[i][j]!=0):
+                        tmp.append(j)
+        return tmp
     def __str__(self):
         """ 
         Making lists of incidence from every graph and printing it out
@@ -125,22 +127,29 @@ class graph:
         output+="Graph has "+ str(self.get_edges()) + " edges"
         return output
     def remove_edge_undirected(self,u,v):
-        """ Removes edge (u,v) in E """
-        if self.is_weighted==True:
-            raise "NEED UNWEIGHTED GRAPH"
+        """ Removes edge (u,v) and (v,u) in E """
+        
         if self.is_Matrix==True:
             self.repr[u][v] = 0
             self.repr[v][u] = 0
         else:
-            i = 0
-            while (self.is_weighted==True  and self.repr[u][i][0]!=v 
-            or self.is_weighted==False and self.repr[u][i]!=v):
-                i+=1
-            if i<len(self.repr[u]):
-                self.repr[u].remove(v)
-                self.repr[v].remove(u)
+            if self.is_weighted==False:
+                if (v in self.repr[u] ):
+                    self.repr[u].remove(v)
+                if (u in self.repr[v]):
+                    self.repr[v].remove(u)
             else:
-                raise "NO SUCH EDGE"
+                if (v in list(map(lambda x: x[0],self.repr[u])) ):
+                    for a,b in self.repr[u]:
+                        if a==v:
+                            w = b
+                    self.repr[u].remove((v,b))
+                if (u in list(map(lambda x: x[0],self.repr[v])) ):
+                    for a,b in self.repr[v]:
+                        if a==u:
+                            w = b
+                    self.repr[v].remove((u,w))
+            
     def reverse_edges(self):
         if self.is_Matrix==True:
             graph_tmp = [[0]*self.get_vertex() for _ in range(self.get_vertex())]
@@ -158,7 +167,7 @@ class graph:
                 for j in range(len(self.repr[i])):
                     graph_tmp[i].append(self.repr[i][j])
             if self.is_weighted==True:
-                raise "NOT READY YET"
+                raise "NOT READY YET"4
             for i in range(len(graph_tmp)):
                 j = 0
                 while (len(graph_tmp[i])>0):
@@ -166,3 +175,62 @@ class graph:
                     graph_tmp[i].remove(tmp)
                     self.repr[i].remove(tmp)
                     self.repr[tmp].append(i)
+
+def Mosty_DFS(graph):
+    """ 
+    Input: graph nie skierowany nie ważony
+    Most -> krawedz, usuniecie ktorej powoduje rozspujnienie grafu\n
+    Returns: [(2, 4), (3, 7)], where 2,4 -> is an edge
+
+    O(V + E)\n
+    Example:
+        g = graph([[1, 3], [0, 2], [1, 3, 4], [0, 2, 7], [2, 5, 6], [
+        4, 6], [4, 5], [3]], is_Matrix=False, is_weighted=False)
+        print(Mosty_DFS(g))
+     """
+    def DFS_With_Low(graph):
+        time = 0
+        visited = [False] * graph.get_vertex()
+        parents = [-1] * graph.get_vertex()
+        entry = [-1] * graph.get_vertex()
+        low = [-1] * graph.get_vertex()
+        wsteczna = [-1] * graph.get_vertex()
+        process = [-1] * graph.get_vertex()
+
+        def DFS_Visit(u_index, graph):
+            nonlocal time, visited, parents, entry, low, wsteczna, process
+            time += 1
+            visited[u_index] = True
+            entry[u_index] = time
+            """ Default wartosc low """
+            low[u_index] = time
+            for v_ind in graph.get_incidence(u_index):
+                if not visited[v_ind] == True:
+                    parents[v_ind] = u_index
+                    DFS_Visit(v_ind, graph)
+                    """ Podnosze wartosc w gore drzewa DFS """
+                    low[u_index] = min(
+                        low[v_ind], low[u_index])
+                else:
+                    if parents[u_index] != v_ind:
+                        """ Krawędź wsteczna tu jest, bo już odwiedzony i nie rodzic,
+                        wiec uaktualizujemy low"""
+                        """ !!!UWAGA PORÓWNUJE Z ENTRY WSTECZNYM A NIE LOW!!! """
+                        low[u_index] = min(low[u_index], entry[v_ind])
+                        wsteczna[u_index] = v_ind
+            time += 1
+            process[u_index] = time
+
+        for v_ind in range(graph.get_vertex()):
+            if not visited[v_ind]:
+                DFS_Visit(v_ind, graph)
+        return entry, parents, low
+
+    entry, parents, low = DFS_With_Low(graph)
+    tab_of_mosts = []
+    for i in range(graph.get_vertex()):
+        if parents[i] != -1 and low[i] == entry[i]:
+            tab_of_mosts.append((parents[i], i))
+    if tab_of_mosts == []:
+        return "No Mosts Found"
+    return tab_of_mosts

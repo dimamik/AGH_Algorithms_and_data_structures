@@ -1,3 +1,10 @@
+class PseudoVertex():
+        """ 
+        Help-class to handle if (is_weighted==True and is_Matrix == False) case
+         """
+        def __init__(self, index=-1, weight=-1):
+            self.index = index
+            self.weight = weight
 class graph:
     def __init__(self, repr,is_Matrix,is_weighted=False ):
         """ 
