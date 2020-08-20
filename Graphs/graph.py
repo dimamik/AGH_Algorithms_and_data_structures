@@ -32,7 +32,14 @@ class graph:
                     [(3,15),(0,8)],
                     []
                 ]
-
+        Example for graph:
+            g = graph([
+            [0, 5, 1, 0],
+            [0, 0, 0, 1],
+            [0, 0, 0, 20],
+            [0, 0, 0, 0],
+            ], is_Matrix=True, is_weighted=True)
+            print(g) 
          """
         self.is_Matrix = is_Matrix
         self.repr = repr
@@ -45,6 +52,11 @@ class graph:
                 for j in range(len(self.repr[i])):
                     self.repr[i][j] = PseudoVertex(
                         self.repr[i][j][0], self.repr[i][j][1])
+    def add_edge(self,u,v,w=-1):
+        if (self.is_Matrix==False and self.is_weighted==False):
+            self.repr[u].append(v)
+        else:
+            raise "NOT ADDED YET"
     def get_edges(self):
         edges = 0
         if (self.is_Matrix==True):
@@ -67,8 +79,14 @@ class graph:
             return tmp
         elif (self.is_Matrix==False and self.is_weighted==False):
             return self.repr[u]
+        elif (self.is_Matrix==False and self.is_weighted==True):
+            tmp = []
+            v = u
+            for j in range(len(self.repr[v])):
+                tmp.append((self.repr[v][j].index, self.repr[v][j].weight))
+            return tmp
         else:
-            raise "NOT ADDED YET"
+            raise "NOT ADDED YET" 
     def get_vertex_tab(self):
         return range(self.get_vertex())
     def __str__(self):
@@ -106,15 +124,6 @@ class graph:
         output+="Graph has "+ str(len(self.repr)) + " vertices"+"\n"
         output+="Graph has "+ str(self.get_edges()) + " edges"
         return output
-
-""" g = graph([
-    [0, 5, 1, 0],
-    [0, 0, 0, 1],
-    [0, 0, 0, 20],
-    [0, 0, 0, 0],
-], is_Matrix=True, is_weighted=True)
-
-print(g) """
 
 
 def BFS(graph, start_v):
@@ -162,12 +171,66 @@ def BFS(graph, start_v):
                 parents[v] = u
                 Queue_FIFO.append(v)
     return distance,parents
+def BFS_01(graph,start_v):
+    """ 
+    Given graph with 0/1 weights
+    Finding the shortest path from start_v to each other vertex
+    Using double queue and put 0 vertecies to begining and 1 to the end\n
 
+    g3 = graph([
+    [(1,1),(2,0)],
+    [(0,1),(2,0)],
+    [(0,0),(1,0)]
+    ],is_Matrix=False,is_weighted=True)
+    BFS_01(g3,0)
+    g4 = graph([
+    [],
+    [(2,1)],
+    [(1,1),(3,1),(4,0)],
+    [(2,1),(4,1),(6,0)],
+    [(2,0),(3,1),(5,1)],
+    [(4,1),(6,1)],
+    [(5,1)]
+    ],is_Matrix=False, is_weighted=True)
+    BFS_01(g4,1)
+     """
+    Double_Queue = []
+    #We can skip the part of allocating this tabs but for convinience leave it as it is
+    distance = [float("inf")] * graph.get_vertex()
+    parents = [-1] * graph.get_vertex()
+    visited = [False] * graph.get_vertex()
+    distance[start_v] = 0
+    visited[start_v] = True
+    parents[start_v] = start_v
+    Double_Queue.append(start_v)
+    while len(Double_Queue)!=0:
+        u = Double_Queue.pop(0)
+        for v in graph.get_incidence(u):
+            w = v[1]
+            v = v[0]
+            if not visited[v] or distance[v] > distance[u] + w:
+                visited[v] = True
+                distance[v] = distance[u] + w
+                parents[v] = u
+                if (w==0):
+                    Double_Queue.insert(0,v)
+                else:
+                    Double_Queue.append(v)
+    return distance,parents
 def DFS(graph,start_v):
     """ 
     Searching in depth algorithm
     O(V+E)\n
-    Can be used in various of situations like topological sort,finding mosts, etc.
+    Can be used in various of situations like topological sort,finding mosts, etc.\n
+    g1 = graph([
+    [1,3,4],
+    [3],
+    [5],
+    [5],
+    [2,5],
+    []
+    ],is_Matrix=False)
+    DFS(g1,0)
      """
     visited = [False] * graph.get_vertex()
     entry = [-1] * graph.get_vertex()
@@ -190,15 +253,26 @@ def DFS(graph,start_v):
         if not visited[v]:
             DFSVisit(graph,v)
     return parents
+def Topological_Sort(graph):
+    """ 
+    Sorting vertecies such thah if (u,v) in E, than u < v
+    Using Usual DFS and append to begining the processed vertecies
+    Example:
+        g = graph([[1,2],[],[1,3,4],[1,4],[0]], is_Matrix=False, is_weighted=False)
+        print(Topological_Sort)
+     """
+    visited = [False] * graph.get_vertex()
+    sorted_vertecies = []
 
-
-g1 = graph([
-[1,3,4],
-[3],
-[5],
-[5],
-[2,5],
-[]
-],is_Matrix=False)
-
-DFS(g1,0)
+    def DFSVisit(graph, u):
+        nonlocal visited, sorted_vertecies
+        visited[u] = True
+        for v in graph.get_incidence(u):
+            if not visited[v]:
+                DFSVisit(graph, v)
+        sorted_vertecies.insert(0, u)
+    for v in range(graph.get_vertex()):
+        if not visited[v]:
+            DFSVisit(graph, v)
+    return sorted_vertecies
+def Euler_Cykle(graph):

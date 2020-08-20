@@ -50,7 +50,7 @@ def Topologic_Sort_DFS(tab_of_v):
     return Topologic_Sort
 
 
-tab_v=BuildFromInc([[[],[2],[3],[4],[5],[]]])
-tab_v=BuildFromInc([[1,2],[],[1,3,4],[1,4],[0]])
+tab_v=BuildFromInc([[],[2],[3],[4],[5],[]])
+#tab_v=BuildFromInc([[1,2],[],[1,3,4],[1,4],[0]])
 print(Topologic_Sort_DFS(tab_v))
 

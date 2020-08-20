@@ -56,5 +56,5 @@ def DFS( G ):
     print(Sorted_Vertex)
     return tab
 
-tab=tab_to_Wierz([[1],[2,3],[3],[]])
+tab=[[1],[2,3],[3],[]]
 DFS(tab)
