@@ -45,7 +45,7 @@ def Sciezka_Powieksz(R,s,t):
 
 
 
-def zad(G,s,t):
+def Floyd_Fulkerson(G,s,t):
     """ 
     G - graf pojemnosci w postaci macierzy incydencji
      """
@@ -72,8 +72,6 @@ def zad(G,s,t):
         output.append(' Płynie -> ')
         output.append(min_c_flow)
         print(output)
-
-
         max_flow+=min_c_flow
         u=tab_p[t]
         v=t
@@ -96,7 +94,7 @@ tab_v=[
     [0,0,0,0,0,5],
     [0,0,0,0,0,0]
 ]
-print(zad(tab_v,0,5))
+print(Floyd_Fulkerson(tab_v,0,5))
 
 
     

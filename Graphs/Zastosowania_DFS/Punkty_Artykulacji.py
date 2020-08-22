@@ -1,3 +1,6 @@
+""" 
+A vertex in an undirected connected graph is an articulation point (or cut vertex) iff removing it (and edges through it) disconnects the graph. Articulation points represent vulnerabilities in a connected network – single points whose failure would split the network into 2 or more components. They are useful for designing reliable networks.
+ """
 """ HELPFULL STRUCTURES """
 class Vertex():
     """ 
@@ -82,7 +85,7 @@ def DFS_Parent_and_Wsteczne(tab_of_v):
 
 def PunktyArtykulacji(tab_of_v):
     """ 
-    Zwraca tablice punktow artykulacji grafu w postaci listy sasiedstwa G=[[...]]
+    Returns: tablice punktow artykulacji grafu w postaci listy sasiedstwa G=[[...]]
     
      """
     tab_of_korzen,tab_art,tab_entry,tab_p,tab_w,tab_l=DFS_Parent_and_Wsteczne(tab_of_v)    
@@ -100,5 +103,6 @@ def PunktyArtykulacji(tab_of_v):
     return art_points
 
 tab_v=BuildFromInc([[1,2],[0,2],[1,0,3,4],[2,4],[2,3]])
-#tab_v=BuildFromInc([[1],[0,2],[1]])
+tab_v=BuildFromInc([[1],[0,2],[1]])
+tab_v=BuildFromInc([[1],[2],[3],[]])
 print(PunktyArtykulacji(tab_v))

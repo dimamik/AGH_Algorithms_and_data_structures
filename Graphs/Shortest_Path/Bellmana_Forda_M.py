@@ -53,7 +53,6 @@ def BellmanaForda(graph, start, end):
 
 """ Bellmana Forda na Macierzy """
 
-
 def BellmanaForda(graph, start, end):
     """ 
     Dziala dla: 1) w(u,v) in RR (Czyli wszystkie wagi)

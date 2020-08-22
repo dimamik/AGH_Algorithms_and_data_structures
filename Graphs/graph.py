@@ -167,7 +167,7 @@ class graph:
                 for j in range(len(self.repr[i])):
                     graph_tmp[i].append(self.repr[i][j])
             if self.is_weighted==True:
-                raise "NOT READY YET"4
+                raise "NOT READY YET"
             for i in range(len(graph_tmp)):
                 j = 0
                 while (len(graph_tmp[i])>0):

@@ -16,8 +16,6 @@ class Vertex():
         self.entry=-1
         self.process=-1
         self.distance=0
-
-
 class PseudoVertex():
     """ 
     Pomocnicza klasa dla przechowywania wag
@@ -92,24 +90,3 @@ def BFSNaWazonych(tab_of_v,s_ind,t_ind):
 tab_v = BuildTab_of_v([[1,3,5],[1,2,2],[2,4,3],[4,5,1],[1,5,10],[3,5,2]],6,True)
 tab_v = BuildTab_of_v([[0,1,4],[1,2,3],[0,2,8],[2,3,2],[2,4,5],[3,4,4],[0,5,5],[5,4,5]],6,True)
 print(BFSNaWazonych(tab_v,0,5))
-
-""" 
-u_class=Q.get()
-        u_ind=u_class.index
-        #print (list(Q.queue))
-        if u_class.waga>1:
-                u_class.waga-=1
-                #tab_of_v[v_ind].distance=tab_of_v[u_ind].distance+1
-                Q.put(u_class)
-                continue
-        for v_pseudo in tab_of_v[u_ind].tab_index_incident:
-            v_ind=v_pseudo.index
-            
-            if not tab_of_v[v_ind].visited:
-                if v_ind==t_ind:
-                    return u_ind
-                tab_of_v[v_ind].visited=True
-                tab_of_v[v_ind].distance=tab_of_v[u_ind].distance+1
-                tab_of_v[v_ind].parrent=u_ind
-                Q.put(PseudoVertex(v_ind,v_pseudo.waga))
- """

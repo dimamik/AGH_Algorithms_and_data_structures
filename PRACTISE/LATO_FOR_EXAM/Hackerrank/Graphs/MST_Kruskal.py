@@ -1,23 +1,4 @@
-""" 
-1. Posortuj krawędzi rosnącopo wagach
-2. A = ()
-3. for v in V:
-    make_union(V)
-4. for e in RosnacyPorzadek_E: (E=(u,v))
-    if find_set(u)!=find_set(v):
-        A=A+e
-        union(u,v)
-
--->O(ElogV)
-
- """
-
-""" 
-Implementacja:
-1. Lepiej idzie przez listy sądiedstwa + E sortowac w (u,v,waga)
-
-2. ...
- """
+""" https://www.hackerrank.com/challenges/primsmstsub/problem """
 class Vertex():
     def __init__(self,id):
         """ 
@@ -46,6 +27,20 @@ def BuildTab_of_v(tab,n,skierowany=False):
     takes tab=[[0,2,3],...[]]
      """
     tab_of_v=[None]*n
+    """ Check for the same """
+    tab_tmp = []
+    for i in range(len(tab)):
+        u = tab[i][0]
+        v = tab[i][1]
+        w = tab[i][2]
+        for j in range(i,len(tab)):
+            if (tab[j][0] == u and tab[j][1] == v):
+                if (w>tab[j][2]):
+                    w = tab[j][2]
+                    tab[j][2] = float("inf")
+        if (w != float("inf")):
+            tab_tmp.append([u,v,w])
+    tab = tab_tmp[:]
     for i in range(n):
         tab_of_v[i]=Vertex(i)
     for i in range(len(tab)):
@@ -103,11 +98,19 @@ def Kruskal(tab_of_v):
      """
     #print(tab_of_edges)
     return MST
+# Complete the prims function below.
+def prims(n, edges, start):
+    tab_of_v = BuildTab_of_v(edges,n+1)
+    x = Kruskal(tab_of_v)
+    sum = 0
+    for u,v in x:
+        for i in range(len(tab_of_v[u].tab_index_incident)):
+            if tab_of_v[u].tab_index_incident[i].index == v:
+                sum+=tab_of_v[u].tab_index_incident[i].waga
+    return sum
 
-
-
-""" Approved z przykladu z wykladu """
-tab_of_v=BuildTab_of_v([[1,3,1],[1,2,3],[2,3,2],[3,4,4],[4,5,6],[5,3,5]],6)
-
-tab_of_v=BuildTab_of_v([[0,1,3],[0,4,1],[0,3,2],[1,2,2],[2,3,1],[2,6,6],[6,5,8],[3,5,5],[5,4,7]],7)
-Kruskal(tab_of_v) 
+tab = [] 
+for i in range(6):
+    tmp = list(((map(int,input().rstrip().split()))))
+    tab.append(tmp)
+print(prims(5, tab ,2))

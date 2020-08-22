@@ -1,3 +1,21 @@
+""" NOT Working """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """ HELPFULL STRUCTURES """
 class Vertex():
     """ 
@@ -42,6 +60,9 @@ def DFS_Usual_Visit(u_index,tab_of_v,tab_przetworzone):
     if len(tab_przetworzone)==len(tab_of_v) or len(tab_przetworzone)==len(tab_of_v)+1:
         return tab_przetworzone
 def DFS(tab_of_v):
+    """ 
+    
+     """
     for v_ind in range(len(tab_of_v)):
         if not tab_of_v[v_ind].visited:
             tab_przetworzone=[]

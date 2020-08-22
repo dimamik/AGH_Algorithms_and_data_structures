@@ -257,10 +257,5 @@ tab_v=BuildFromInc([[1,3],[0,2],[1,3,4],[0,2,7],[2,5,6],[4,6],[4,5],[3]])
 print(MostyDFS(tab_v)) """
 #print(DFS_Parent_and_Wsteczne(tab_v))
 
-
-
-
-
-
 """ Punkty artykulacji """
 """ ... """
