@@ -176,49 +176,98 @@ class graph:
                     self.repr[i].remove(tmp)
                     self.repr[tmp].append(i)
 
-def BFS(graph, start_v):
+def BFS_01(graph,start_v):
     """ 
-    Searching Algorithm working in Breadth, works only with non-weighted vertecies\n
-    ->O(V+E)
-    Returns: distance,parents\n
-    For given non-weighted graph and start_v returns distance from start_v to each of the other vertecies and parents in this distance.
-        Is based on the fact that there is no shorter path than current because of the equal weights.
-        Can be improved and transformated to the weighted but small integers by dividing into the ones with weight=1\n
-    Test Cases For BFS
-        g1 = graph([
-            [1,3,4],
-            [3],
-            [5],
-            [5],
-            [2,5],
-            []
-        ],is_Matrix=False)
-        g2 = graph([
-            [0,1,1,1],
-            [0,0,1,0],
-            [0,0,0,0],
-            [0,0,0,0]
-        ],is_Matrix=True)
-        BFS(g2,1) 
+    Given graph with 0/1 weights
+    Finding the shortest path from start_v to each other vertex
+    Using double queue and put 0 vertecies to begining and 1 to the end\n
+    Returns: shortest distance from start_v to each of V\n
+    g3 = graph([
+    [(1,1),(2,0)],
+    [(0,1),(2,0)],
+    [(0,0),(1,0)]
+    ],is_Matrix=False,is_weighted=True)
+    BFS_01(g3,0)
+    g4 = graph([
+    [],
+    [(2,1)],
+    [(1,1),(3,1),(4,0)],
+    [(2,1),(4,1),(6,0)],
+    [(2,0),(3,1),(5,1)],
+    [(4,1),(6,1)],
+    [(5,1)]
+    ],is_Matrix=False, is_weighted=True)
+    BFS_01(g4,1)
      """
-    if (graph.is_weighted==True):
-        raise "Given Weighted Graph to BFS"
-    Queue_FIFO = []
+    Double_Queue = []
     #We can skip the part of allocating this tabs but for convinience leave it as it is
     distance = [float("inf")] * graph.get_vertex()
     parents = [-1] * graph.get_vertex()
     visited = [False] * graph.get_vertex()
     distance[start_v] = 0
     visited[start_v] = True
-
     parents[start_v] = start_v
-    Queue_FIFO.append(start_v)
-    while len(Queue_FIFO)!=0:
-        u = Queue_FIFO.pop(0)
+    Double_Queue.append(start_v)
+    while len(Double_Queue)!=0:
+        u = Double_Queue.pop(0)
         for v in graph.get_incidence(u):
-            if not visited[v]:
+            w = v[1]
+            v = v[0]
+            if not visited[v] or distance[v] > distance[u] + w:
                 visited[v] = True
-                distance[v] = distance[u] + 1
+                distance[v] = distance[u] + w
                 parents[v] = u
-                Queue_FIFO.append(v)
-    return distance,parents
+                if (w==0):
+                    Double_Queue.insert(0,v)
+                else:
+                    Double_Queue.append(v)
+    return distance
+# Complete the quickestWayUp function below.
+def quickestWayUp(ladders, snakes):
+    """ 
+    g = graph([
+    [(1,1),(2,1)],
+    [(2,1)],
+    [(3,0)],
+    [(4,1),(5,1)],
+    [(5,1)],
+    [(6,0)],
+    [(7,1)],
+    [(8,0)],
+    []
+    ],is_Matrix=False,is_weighted=True)
+    print(BFS_01(g,0))
+    """
+    repr = [[] for _ in range(101)]
+    for i in range(len(ladders)):
+        repr[ladders[i][0]].append((ladders[i][1],0))
+    for i in range(len(snakes)):
+        repr[snakes[i][0]].append((snakes[i][1],0))
+    for i in range(1,101):
+        if len(repr[i])==0:
+            if (i+1<101):
+                repr[i].append((i+1,1))
+            if (i+2<101):
+                repr[i].append((i+2,1))
+            if (i+3<101):
+                repr[i].append((i+3,1))
+            if (i+4<101):
+                repr[i].append((i+4,1))
+            if (i+5<101):
+                repr[i].append((i+5,1))
+            if (i+6<101):
+                repr[i].append((i+6,1))
+    g = graph(repr,is_Matrix=False,is_weighted=True)
+    return BFS_01(g,1)[100] if BFS_01(g,1)[100]!=float("inf") else -1
+    pass
+
+
+
+
+print(quickestWayUp([[3,54],[37,100]], [[56,33]]))
+
+""" 
+print(quickestWayUp([[32, 62], [42, 68], [12, 98]] ,[[95, 13], [97, 25], [93, 37], [79, 27], [75, 19], [49, 47], [67, 17]]))
+
+print(quickestWayUp([[8, 52], [6, 80], [26, 42], [2, 72]], [[51, 19], [39, 11], [37, 29], [81, 3], [59, 5], [79, 23], [53, 7], [43, 33], [77, 21]])) """
+
