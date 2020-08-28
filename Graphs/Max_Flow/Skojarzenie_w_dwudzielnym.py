@@ -47,14 +47,7 @@ def Sciezka_Powieksz(R,s,t):
 
 def Floyd_Fulkerson(G,s,t):
     """ 
-    Takes:
-        G - NIESKIEROWANY GRAF w postaci macierzy incydencji
-        s - początek
-        t - koniec
-    Returns:
-        Max flow z poczatku w koniec 
-    Prints:
-        Droge przeplywu i ilosc ego co plynie
+    G - graf NIESKIEROWANY pojemnosci w postaci macierzy incydencji
      """
     P = [None]*len(G)
     for i in range(len(G)):
@@ -91,17 +84,33 @@ def Floyd_Fulkerson(G,s,t):
         min_c_flow,tab_p=Sciezka_Powieksz(R,s,t)
     return max_flow
 
-
-    
+def SkojarzenieDwudzielny(tab_v,first_group,second_group):
+    """ 
+    Takes: 
+        DWUDZIELNY GRAPH NIESKIEROWANY tab_v w postaci macierzy incydencji
+        first_group = [0,1,2,3] -> wierzcholki z lewej strony graphu dwudzielnego
+        second_group = [0,1,2,3] -> wierzcholki z prawej strony graphu dwudzielnego
+    Automatycznie Dodaje do grafu 2 wierzcholki s and f
+    Returns: Ilosc Skojarzen w grafie dwudzielnym
+     """
+    tab_v.append([0 for _ in range(len(tab_v))])
+    tab_v.append([0 for _ in range(len(tab_v)-1)])
+    for i in range(len(tab_v)):
+        tab_v[i].append(0)
+        tab_v[i].append(0)
+    for i in range(len(first_group)):
+        tab_v[len(tab_v)-2][first_group[i]]=1
+    for i in range(len(second_group)):
+        tab_v[second_group[i]][len(tab_v)-1]=1
+    return Floyd_Fulkerson(tab_v,len(tab_v)-2,len(tab_v)-1)
 tab_v=[
-    [0,4,3,0,0,0],
-    [0,0,2,2,0,0],
-    [0,0,0,2,2,0],
-    [0,0,0,0,0,4],
-    [0,0,0,0,0,5],
-    [0,0,0,0,0,0]
+    [0,0,0,0,0,1,0,0],
+    [0,0,0,0,1,0,0,0],
+    [0,0,0,0,1,0,1,1],
+    [0,0,0,0,0,0,1,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0]
 ]
-print(Floyd_Fulkerson(tab_v,0,5))
-
-
-    
+print(SkojarzenieDwudzielny(tab_v,[0,1,2,3],[4,5,6,7]))
