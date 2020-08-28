@@ -37,7 +37,9 @@ def FindBST(root,key_to_find):
 
 def BSTMakeFromSortedArray(tab):
     """ _I
-    With using PYTHON TRICKS """
+    With using PYTHON TRICKS 
+    WITHOUT PARENTS
+    """
     if len(tab)<=0:
         return None
     mid = len(tab)//2
@@ -46,9 +48,8 @@ def BSTMakeFromSortedArray(tab):
     root.right=BSTMakeFromSortedArray(tab[mid+1:])
     return root
 
-r=BSTMakeFromSortedArray([1,2,3,4,5])
-PrintTheTree(r)
-
+""" r=BSTMakeFromSortedArray([1,2,3,4,5])
+PrintTheTree(r) """
 
 def MinBST(root):
     if root==None:
@@ -79,8 +80,9 @@ def Insert(root,key_to_find_succ):
         tmp.parent=root
     return root
 
+
 def SuccBST(root,key_val):
-    """ Następnik w posortowanej tablice """
+    """ Nastepnik w posortowanej tablice """
     if root==None:
         return
     if root.key==key_val:
@@ -100,7 +102,11 @@ def SuccBST(root,key_val):
         return SuccBST(root.right,key_val)
     else:
         return SuccBST(root.left,key_val)
-        
+
+""" r=BSTMakeFromSortedArray([1,7,15,28,190,256])
+PrintTheTree(r)
+print(SuccBST(r,28).key) """
+
 def PreccBST(root,key_val):
     """ Poprzednik w posortowanej tablice """
     if root==None:
@@ -127,6 +133,79 @@ def DeleteBST(root,key_to_del):
     
     pass
 
+def DeleteBSTWithoutParents(root, val_to_del):
+    if root == None:
+        return root
+    if root.key > val_to_del:
+        root.left = DeleteBSTWithoutParents(root.left, val_to_del)
+    elif root.key < val_to_del:
+        root.right = DeleteBSTWithoutParents(root.right, val_to_del)
+    #Found a Node to delete
+    else:
+        if root.left == None:
+            tmp = root.right
+            root = None
+            return tmp
+        elif root.right == None:
+            tmp = root.left
+            root = None
+            return tmp
+        #If we have Node with 2 kids than we need to dinf succ
+        tmp = MinBST(root.right)
+        root.key = tmp.key
+        root.right = DeleteBSTWithoutParents(root.right, tmp.key)
+    return root
+
+
+""" r=BSTMakeFromSortedArray([1,7,15,28,190,256])
+DeleteBSTWithoutParents(r, 28)
+PrintTheTree(r) """
+
+def DeleteBSTWithParents(root, key):
+    """ 
+    !Uwaga I!
+     """
+    curr = root
+    while curr and curr.key != key:
+        parent = curr
+        if key < curr.key:
+            curr = curr.left
+        else:
+            curr = curr.right
+
+    if curr is None:
+        return root
+
+    if curr.left is None and curr.right is None:
+        if curr != root:
+            if parent.left == curr:
+                parent.left = None
+            else:
+                parent.right = None
+        else:
+            root = None
+
+    elif curr.left and curr.right:
+        min_key = MinBST(curr.right)
+        val = min_key.key
+
+        DeleteBSTWithParents(root, min_key.key)
+        curr.key = val
+    else:
+        """ Jedno Dziecko """
+        if curr.left:
+            child = curr.left
+        else:
+            child = curr.right
+        if curr != root:
+            if curr == parent.left:
+                parent.left = child
+            else:
+                parent.right = child
+        else:
+            root = child
+    return root
+
 
 """ r=Node(15)
 Insert(r,Node(10))
@@ -140,4 +219,6 @@ Insert(r,Node(278))
 Insert(r,Node(13))
 Insert(r,Node(4))
 Insert(r,Node(14))
-print(SuccBST(r,17).key) """
+PrintTheTree(r)
+DeleteBSTWithParents(r, 19)
+print(SuccBST(r,215).key) """
