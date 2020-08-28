@@ -22,12 +22,24 @@ def heapify(k,i):   #Naprawia kopiec działając w dół!
         k[i],k[max]=k[max],k[i]
         heapify(k,max)
 def BuildHeap(tab):
-    #Funckja dziala z dołu w górę! (Bo musisz naprawic calkiem kopiec, a naprawiajac z dzieci
-    #nie robisz duzo razy to same)
+    """ 
+    More in folder HEAP in Sorting Arrays
+    Heap -> Satisfies property that if P is parent of Q, than P is more than Q (for MaxHeap)
+    Funckja dziala z dołu w górę! (Bo musisz naprawic calkiem kopiec, a naprawiajac z dzieci
+    nie robisz duzo razy to same) """
     for i in range(tab[0]//2,0,-1):
         heapify(tab,i)
     return tab
 def heapsort(tab):
+    """ 
+    Takes:
+        Usual tab
+    Returns:
+        Sorted tab
+    Niestabliny -> O(nlogn) -> (Heapify -> logn, Build Heap -> n)
+    Algorithm:
+        Buduję kopiec i od końca stosuje Heapify na początku żeby znaleźć wartość największą, potem zamieniam z końcem i zmniejszam range of heapify
+     """
     #Musimy dolaczyc na poczatek k[0] bo powyzsze funkcje biora to wartosc
     tab = [len(tab)] + tab
     #Budujemy heap
@@ -41,6 +53,12 @@ def heapsort(tab):
 
 
 print(heapsort([5,3,1,0,2,4,4,4,5]))
+
+
+
+
+
+
 
 
 

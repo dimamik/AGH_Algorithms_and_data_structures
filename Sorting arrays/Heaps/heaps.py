@@ -93,6 +93,15 @@ nie robisz duzo razy to same)
     
 def Heapsort(tab):
     """ 
+    Takes:
+        Usual tab
+    Returns:
+        Sorted tab
+    Niestabliny -> O(nlogn) -> (Heapify -> logn, Build Heap -> n)
+    Algorithm:
+        Buduję kopiec i od końca stosuje Heapify na początku żeby znaleźć wartość największą, potem zamieniam z końcem i zmniejszam range of heapify
+     """
+    """ 
     !!HEAPSORT GAREK!!
     Takes usual tab as an input and addes size as a tab[0] in O(n) time
      """

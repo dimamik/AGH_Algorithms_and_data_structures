@@ -1,5 +1,6 @@
 def Binary_Search_Recursive(tab, el_searching, start=0, end=-1):
     """ 
+    O(logn) dla posortowanej tablicy
     Zwraca -1 gdy nie ma elementu
     Lub jego index gdy jest
      """

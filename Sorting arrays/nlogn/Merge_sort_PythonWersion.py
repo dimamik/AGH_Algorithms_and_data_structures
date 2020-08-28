@@ -23,6 +23,10 @@ def merge(l, r):
 
 
 def Merge_sort(tab):
+    """ 
+    Stabilny -> O(nlogn) -> O(nlogn)
+    Divide and Concure
+     """
     if len(tab) == 1:
         return tab
     if len(tab) > 1:

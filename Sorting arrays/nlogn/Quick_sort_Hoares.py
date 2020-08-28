@@ -19,6 +19,16 @@ def Hoare_part(tab,low,high):
             return j
 
 def Quick_Sort(tab,low=0,high=-1):
+    """ 
+    Main:
+        Niestabilny, O(nlogn) -> O(n^2)
+        Pracuje z danej tablicej
+    Algorithm:
+        Rozdziela dane na pre-sorted groups wzgl pivota
+    Zastosowania:
+        Summa from i to j -> Find i el and j el and then go throught tab adding ->(O(n))
+        k-th smallest
+     """
     if high==-1:
         high=len(tab)-1
     if low<high:
@@ -29,6 +39,24 @@ def Quick_Sort(tab,low=0,high=-1):
 tab=[17,3,17,20,0,17,0,1,1546,0,15]
 Quick_Sort(tab)
 print(tab)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 """ TESTING """

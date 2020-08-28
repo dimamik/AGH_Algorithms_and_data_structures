@@ -14,6 +14,7 @@ def QuickSelect(tab,k,start=0,end=-1):
     Znajduje wartosc pod (k-tym indeksem)+1 w posortowanej tablice
     k in [1,len(tab)]
     Zwraca None jezeli k nie pasuje warunkom wyzej
+    -> O(n) -> O(n^2)
      """
     if k>len(tab) or k<=0 :
         return None

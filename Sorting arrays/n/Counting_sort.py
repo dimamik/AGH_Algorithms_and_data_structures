@@ -1,4 +1,8 @@
 def Counting_sort(tab):
+    """ 
+    Stabliny -> O(n+k), n - len(tab) , k - wartośći
+    Najlepiej działa dla zakresu liczb [0,k] i k<<n
+     """
     #Finding max element to define the range
     max_el = tab[0]
     for i in range(len(tab)):
@@ -18,5 +22,4 @@ def Counting_sort(tab):
 
 
 print(Counting_sort([1, 2, 2, 5, 1, 2, 0, 9, 3]))
-
 
