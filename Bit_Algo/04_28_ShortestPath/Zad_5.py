@@ -9,6 +9,6 @@ PS. Wagi nieujemne 
 
 """ 
 1.Puszczamy Dijkstry od v do u
-2.Sprawdzamy, czy puszczenie sciezki krotszej nie da taką samą wagę
+2.??Sprawdzamy, czy puszczenie sciezki krotszej nie da taką samą wagę??
 
  """

@@ -17,7 +17,9 @@ Nlogm rozwiazanie za pomoca kopca min: Wstawiamy departure time i bierzemy
 Zadanie 4
 Od 2k-1 идем назад и первую попавшуюся машину ставим и летим дальше
 Zadanie 5
-Dla każdego przedziału znajdujemy inny przedział, taki że nie zachodzą na siebie i różnica między początkiem pierwszego i końcem drugiego jest minimalna. Następnie próbujemy,  spacerować po tak znalezionych sąsiadach i sprawdzamy, czy udało nam się przejść k przedziałów.
+Dla każdego przedziału znajdujemy inny przedział, 
+taki że nie zachodzą na siebie i różnica między początkiem pierwszego i końcem drugiego jest minimalna. 
+Następnie próbujemy,  spacerować po tak znalezionych sąsiadach i sprawdzamy, czy udało nam się przejść k przedziałów.
 Rozw:
 1)	Первый элемент берем элемент с самым маленьким концом
 2)	Удаляем все находящие на него

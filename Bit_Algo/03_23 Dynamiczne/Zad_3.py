@@ -11,3 +11,13 @@ def mentos(arr,start,end):
         return max(arr[start],arr[end])
     sum_from_start_to_end=start
     #... Koniec na filmiku
+
+def Mentos_Problem(tab):
+    sum = 0
+    while len(tab)>0:
+        sum+=(max(tab[0],tab[len(tab)-1]))
+        tab.remove((max(tab[0],tab[len(tab)-1])))
+        tab.remove((max(tab[0],tab[len(tab)-1])))
+    return sum
+
+print(Mentos_Problem([1,3,7,2,5,4]))

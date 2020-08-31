@@ -128,11 +128,6 @@ def PreccBST(root,key_val):
     else:
         return PreccBST(root.left,key_val)
 
-def DeleteBST(root,key_to_del):
-    """ hard implementation if we are taking care of parents """
-    
-    pass
-
 def DeleteBSTWithoutParents(root, val_to_del):
     if root == None:
         return root
@@ -206,6 +201,29 @@ def DeleteBSTWithParents(root, key):
             root = child
     return root
 
+def BST_to_sorted_array(root,arr):
+    if root!=None:
+        BST_to_sorted_array(root.left,arr)
+        arr.append(root.key)
+        BST_to_sorted_array(root.right,arr)
+
+    pass
+def BST_to_Red_Black(root):
+    """ 
+    Idea is simple:
+        Make sorted array from bst and than make from it an RB-Tree
+     """
+    # Make from BST an array
+    tab = []
+    BST_to_sorted_array(root,tab)
+    if len(tab)<=0:
+        return None
+    mid = len(tab)//2
+    root=Node(tab[mid])
+    root.left=BSTMakeFromSortedArray(tab[:mid])
+    root.right=BSTMakeFromSortedArray(tab[mid+1:])
+    return root
+
 
 """ r=Node(15)
 Insert(r,Node(10))
@@ -218,7 +236,25 @@ Insert(r,Node(215))
 Insert(r,Node(278))
 Insert(r,Node(13))
 Insert(r,Node(4))
+Insert(r,Node(14)) """
+
+r=Node(15)
+Insert(r,Node(18))
+Insert(r,Node(17))
+Insert(r,Node(1))
+Insert(r,Node(10))
+Insert(r,Node(16))
+Insert(r,Node(19))
+Insert(r,Node(13))
+Insert(r,Node(4))
 Insert(r,Node(14))
+Insert(r,Node(215))
+Insert(r,Node(278))
 PrintTheTree(r)
-DeleteBSTWithParents(r, 19)
+print()
+BST_to_Red_Black(r)
+PrintTheTree(r)
+
+
+""" DeleteBSTWithParents(r, 19)
 print(SuccBST(r,215).key) """
